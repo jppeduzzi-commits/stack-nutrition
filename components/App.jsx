@@ -82,9 +82,9 @@ export default function App() {
     );
   };
 
-  const addMeal = () => {
+  const addMeal = (time = "12:00") => {
     const id = `meal_${Date.now()}`;
-    const meal = { id, name: "New meal", time: "12:00", pctOfDay: 0, proteinFood: "", carbFood: "", fatFood: "", extras: [] };
+    const meal = { id, name: "New meal", time, pctOfDay: 0, proteinFood: "", carbFood: "", fatFood: "", extras: [] };
     setMeals((m) => [...m, meal]);
     setSelectedMealId(id);
     if (uid) fbSaveMeal(uid, meal);

@@ -1,8 +1,10 @@
 "use client";
 
+import { useMemo } from "react";
 import { solveMeal } from "@/lib/solver";
 import { MACRO_COLORS } from "@/lib/constants";
 import MacroBadge from "./MacroBadge";
+import FoodSearch from "./FoodSearch";
 
 const card = {
   background: "#fff",
@@ -45,14 +47,7 @@ function FoodSelect({ macro, list, value, onChange }) {
       <div style={{ marginBottom: 8 }}>
         <MacroBadge macro={macro} />
       </div>
-      <select value={value} onChange={onChange} style={selectStyle}>
-        <option value="">Choose a food&hellip;</option>
-        {list.map((f) => (
-          <option key={f.id} value={f.id}>
-            {f.name}
-          </option>
-        ))}
-      </select>
+      <FoodSearch list={list} value={value} onChange={onChange} placeholder="Search foods…" />
     </div>
   );
 }
@@ -60,11 +55,11 @@ function FoodSelect({ macro, list, value, onChange }) {
 const ALL_ROLES = ["protein", "carb", "fat"];
 
 export default function MealBuilder({ meal, dailyTargets, foods, foodLookup, onUpdate }) {
-  const allFoods = ALL_ROLES.concat("extra").flatMap((r) => foods[r] || []);
+  const allFoods = useMemo(() => ALL_ROLES.concat("extra").flatMap((r) => foods[r] || []), [foods]);
 
   const result = solveMeal(meal, dailyTargets, foodLookup);
 
-  const setPrimary = (role) => (e) => onUpdate({ [`${role}Food`]: e.target.value });
+  const setPrimary = (role) => (id) => onUpdate({ [`${role}Food`]: id });
 
   const addExtra = () => onUpdate({ extras: [...(meal.extras || []), { food: "", grams: 0 }] });
 
@@ -126,18 +121,14 @@ export default function MealBuilder({ meal, dailyTargets, foods, foodLookup, onU
 
       {(meal.extras || []).map((ex, idx) => (
         <div key={idx} style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "center" }}>
-          <select
-            value={ex.food}
-            onChange={(e) => updateExtra(idx, { food: e.target.value })}
-            style={{ ...selectStyle, flex: 1 }}
-          >
-            <option value="">Choose a food&hellip;</option>
-            {allFoods.map((f) => (
-              <option key={f.id} value={f.id}>
-                {f.name}
-              </option>
-            ))}
-          </select>
+          <div style={{ flex: 1 }}>
+            <FoodSearch
+              list={allFoods}
+              value={ex.food}
+              onChange={(id) => updateExtra(idx, { food: id })}
+              placeholder="Search foods…"
+            />
+          </div>
           <input
             type="number"
             value={ex.grams}

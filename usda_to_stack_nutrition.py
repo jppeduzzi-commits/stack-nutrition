@@ -31,7 +31,10 @@ import json
 import re
 import sys
 
-NUTRIENT_IDS = {"protein": 203, "fat": 204, "carb": 205}
+# Nutrient "number" is FDC's stable legacy code (unchanged since the old SR
+# database); the "id" field is an internal identifier that varies by dataset
+# and is NOT 203/204/205 -- match on number, not id.
+NUTRIENT_NUMBERS = {"protein": "203", "fat": "204", "carb": "205"}
 TOP_LEVEL_KEYS = ["FoundationFoods", "SRLegacyFoods", "SurveyFoods", "BrandedFoods"]
 
 
@@ -41,17 +44,25 @@ def slugify(name):
 
 
 def extract_macros(food):
+    # Track which macros were actually reported, as distinct from a macro
+    # genuinely being zero -- some Foundation Foods records are partial
+    # analyses (e.g. minerals only) and omit total carbohydrate entirely.
+    # Treating "missing" as "zero" silently corrupts categorization (a
+    # legume with unreported carbs looks like a pure protein food), so
+    # callers should drop foods with incomplete macro panels instead.
     vals = {"protein": 0.0, "fat": 0.0, "carb": 0.0}
+    found = set()
     for fn in food.get("foodNutrients", []):
         nutrient = fn.get("nutrient") or {}
-        nid = nutrient.get("id")
+        number = nutrient.get("number")
         amount = fn.get("amount")
         if amount is None:
             continue
-        for key, target_id in NUTRIENT_IDS.items():
-            if nid == target_id:
+        for key, target_number in NUTRIENT_NUMBERS.items():
+            if number == target_number:
                 vals[key] = amount
-    return vals
+                found.add(key)
+    return vals, found
 
 
 def categorize(p_cal, c_cal, f_cal):
@@ -84,17 +95,23 @@ def main():
     out = {"protein": [], "carb": [], "fat": [], "extra": []}
     seen_ids = set()
     skipped_no_macros = 0
+    skipped_incomplete = 0
 
     for path in sys.argv[1:]:
         foods = load_foods(path)
         for food in foods:
+            if not food:
+                continue
             fdc_id = food.get("fdcId")
             name = food.get("description")
             if not name or fdc_id in seen_ids:
                 continue
             seen_ids.add(fdc_id)
 
-            macros = extract_macros(food)
+            macros, found = extract_macros(food)
+            if found != {"protein", "carb", "fat"}:
+                skipped_incomplete += 1
+                continue
             p, c, f = macros["protein"] / 100.0, macros["carb"] / 100.0, macros["fat"] / 100.0
             if p == 0 and c == 0 and f == 0:
                 skipped_no_macros += 1
@@ -118,7 +135,8 @@ def main():
     json.dump(out, sys.stdout, indent=2)
     counts = {k: len(v) for k, v in out.items()}
     print(
-        f"\nParsed {sum(counts.values())} foods ({counts}), skipped {skipped_no_macros} with no macro data.",
+        f"\nParsed {sum(counts.values())} foods ({counts}), skipped {skipped_no_macros} with no macro data, "
+        f"skipped {skipped_incomplete} with an incomplete macro panel (missing protein, carb, or fat entirely).",
         file=sys.stderr,
     )
 

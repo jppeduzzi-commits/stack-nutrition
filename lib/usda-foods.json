@@ -1,0 +1,2256 @@
+{
+  "protein": [
+    {
+      "id": "anchovies_canned_in_olive_oil_with_salt__2747652",
+      "name": "Anchovies, canned in olive oil, with salt, drained",
+      "p": 0.269,
+      "c": 0.0241,
+      "f": 0.0985
+    },
+    {
+      "id": "beef_loin_tenderloin_roast_separable_lea_746758",
+      "name": "Beef, loin, tenderloin roast, separable lean only, boneless, trimmed to 0\" fat, select, cooked, roasted",
+      "p": 0.277,
+      "c": 0.0,
+      "f": 0.0636
+    },
+    {
+      "id": "beef_loin_top_loin_steak_boneless_lip_on_746759",
+      "name": "Beef, loin, top loin steak, boneless, lip-on, separable lean only, trimmed to 1/8\" fat, choice, raw",
+      "p": 0.228,
+      "c": 0.0,
+      "f": 0.0639
+    },
+    {
+      "id": "beef_round_eye_of_round_roast_boneless_s_746760",
+      "name": "Beef, round, eye of round roast, boneless, separable lean only, trimmed to 0\" fat, select, raw",
+      "p": 0.234,
+      "c": 0.0,
+      "f": 0.0248
+    },
+    {
+      "id": "beef_round_top_round_roast_boneless_sepa_746761",
+      "name": "Beef, round, top round roast, boneless, separable lean only, trimmed to 0\" fat, select, raw",
+      "p": 0.237,
+      "c": 0.0,
+      "f": 0.0241
+    },
+    {
+      "id": "beef_round_top_round_boneless_choice_raw_2646173",
+      "name": "Beef, round, top round, boneless, choice, raw",
+      "p": 0.215,
+      "c": 0.0085,
+      "f": 0.057
+    },
+    {
+      "id": "beef_short_loin_porterhouse_steak_separa_746762",
+      "name": "Beef, short loin, porterhouse steak, separable lean only, trimmed to 1/8\" fat, select, raw",
+      "p": 0.227,
+      "c": 0.0,
+      "f": 0.0532
+    },
+    {
+      "id": "beef_short_loin_t_bone_steak_bone_in_sep_746763",
+      "name": "Beef, short loin, t-bone steak, bone-in, separable lean only, trimmed to 1/8\" fat, choice, cooked, grilled",
+      "p": 0.273,
+      "c": 0.0,
+      "f": 0.114
+    },
+    {
+      "id": "beef_top_sirloin_steak_raw_2727574",
+      "name": "Beef, top sirloin steak, raw",
+      "p": 0.22,
+      "c": 0.0022,
+      "f": 0.0571
+    },
+    {
+      "id": "beef_tenderloin_steak_raw_2727573",
+      "name": "Beef,\u00a0tenderloin steak, raw",
+      "p": 0.211,
+      "c": 0.0018,
+      "f": 0.0646
+    },
+    {
+      "id": "cheese_cottage_lowfat_2_milkfat_328841",
+      "name": "Cheese, cottage, lowfat, 2% milkfat",
+      "p": 0.11,
+      "c": 0.0431,
+      "f": 0.023
+    },
+    {
+      "id": "chicken_breast_boneless_skinless_raw_2646170",
+      "name": "Chicken, breast, boneless, skinless, raw",
+      "p": 0.225,
+      "c": 0.0,
+      "f": 0.0193
+    },
+    {
+      "id": "chicken_breast_meat_and_skin_raw_2727569",
+      "name": "Chicken, breast, meat and skin, raw",
+      "p": 0.214,
+      "c": -0.0043,
+      "f": 0.0478
+    },
+    {
+      "id": "chicken_broiler_or_fryers_breast_skinles_331960",
+      "name": "Chicken, broiler or fryers, breast, skinless, boneless, meat only, cooked, braised",
+      "p": 0.321,
+      "c": 0.0,
+      "f": 0.0324
+    },
+    {
+      "id": "chicken_broilers_or_fryers_drumstick_mea_331897",
+      "name": "Chicken, broilers or fryers, drumstick, meat only, cooked, braised",
+      "p": 0.239,
+      "c": 0.0,
+      "f": 0.0595
+    },
+    {
+      "id": "chicken_drumstick_meat_and_skin_raw_2727566",
+      "name": "Chicken, drumstick, meat and skin, raw",
+      "p": 0.184,
+      "c": -0.0047,
+      "f": 0.0594
+    },
+    {
+      "id": "chicken_ground_with_additives_raw_2514746",
+      "name": "Chicken, ground, with additives, raw",
+      "p": 0.179,
+      "c": 0.0,
+      "f": 0.0716
+    },
+    {
+      "id": "chicken_thigh_boneless_skinless_raw_2646171",
+      "name": "Chicken, thigh, boneless, skinless, raw",
+      "p": 0.186,
+      "c": 0.0,
+      "f": 0.0792
+    },
+    {
+      "id": "cod_pacific_or_alaskan_frozen_wild_caugh_2747654",
+      "name": "Cod, Pacific or Alaskan, frozen, wild caught",
+      "p": 0.142,
+      "c": 0.0052,
+      "f": 0.0022
+    },
+    {
+      "id": "cottage_cheese_full_fat_large_or_small_c_2346384",
+      "name": "Cottage cheese, full fat, large or small curd",
+      "p": 0.116,
+      "c": 0.046,
+      "f": 0.0422
+    },
+    {
+      "id": "crustaceans_crab_blue_swimming_lump_past_2684446",
+      "name": "Crustaceans, crab, blue swimming, lump, pasteurized, refrigerated",
+      "p": 0.186,
+      "c": 0.0,
+      "f": 0.0081
+    },
+    {
+      "id": "crustaceans_shrimp_farm_raised_raw_2684443",
+      "name": "Crustaceans, shrimp, farm raised, raw",
+      "p": 0.156,
+      "c": 0.0049,
+      "f": 0.008
+    },
+    {
+      "id": "egg_white_dried_323793",
+      "name": "Egg, white, dried",
+      "p": 0.799,
+      "c": 0.0602,
+      "f": 0.0065
+    },
+    {
+      "id": "egg_white_raw_frozen_pasteurized_323697",
+      "name": "Egg, white, raw, frozen, pasteurized",
+      "p": 0.101,
+      "c": 0.0074,
+      "f": 0.0016
+    },
+    {
+      "id": "eggs_grade_a_large_egg_white_747997",
+      "name": "Eggs, Grade A, Large, egg white",
+      "p": 0.107,
+      "c": 0.0236,
+      "f": 0.0
+    },
+    {
+      "id": "fish_catfish_farm_raised_raw_2684445",
+      "name": "Fish, catfish, farm raised, raw",
+      "p": 0.165,
+      "c": 0.0,
+      "f": 0.0731
+    },
+    {
+      "id": "fish_cod_atlantic_wild_caught_raw_2684444",
+      "name": "Fish, cod, Atlantic, wild caught, raw",
+      "p": 0.161,
+      "c": 0.0,
+      "f": 0.0067
+    },
+    {
+      "id": "fish_haddock_raw_333374",
+      "name": "Fish, haddock, raw",
+      "p": 0.163,
+      "c": 0.0,
+      "f": 0.0045
+    },
+    {
+      "id": "fish_pollock_raw_333476",
+      "name": "Fish, pollock, raw",
+      "p": 0.123,
+      "c": 0.0,
+      "f": 0.0041
+    },
+    {
+      "id": "fish_salmon_sockeye_wild_caught_raw_2684440",
+      "name": "Fish, salmon, sockeye, wild caught, raw",
+      "p": 0.223,
+      "c": 0.0,
+      "f": 0.0494
+    },
+    {
+      "id": "fish_tilapia_farm_raised_raw_2684442",
+      "name": "Fish, tilapia, farm raised, raw",
+      "p": 0.19,
+      "c": 0.0,
+      "f": 0.0248
+    },
+    {
+      "id": "fish_tuna_light_canned_in_water_drained__334194",
+      "name": "Fish, tuna, light, canned in water, drained solids",
+      "p": 0.19,
+      "c": 0.0008,
+      "f": 0.0094
+    },
+    {
+      "id": "flour_soy_defatted_1104705",
+      "name": "Flour, soy, defatted",
+      "p": 0.511,
+      "c": 0.329,
+      "f": 0.0333
+    },
+    {
+      "id": "halibut_frozen_wild_caught_2747656",
+      "name": "Halibut, frozen, wild caught",
+      "p": 0.191,
+      "c": -0.0006,
+      "f": 0.0059
+    },
+    {
+      "id": "ham_sliced_pre_packaged_deli_meat_96_fat_332397",
+      "name": "Ham, sliced, pre-packaged, deli meat (96%fat free, water added)",
+      "p": 0.167,
+      "c": 0.0027,
+      "f": 0.0373
+    },
+    {
+      "id": "ham_sliced_restaurant_746952",
+      "name": "Ham, sliced, restaurant",
+      "p": 0.196,
+      "c": 0.0236,
+      "f": 0.0368
+    },
+    {
+      "id": "lobster_tail_only_frozen_wild_caught_2747657",
+      "name": "Lobster, tail only, frozen, wild caught",
+      "p": 0.13,
+      "c": 0.0089,
+      "f": 0.0037
+    },
+    {
+      "id": "mahi_mahi_frozen_wild_caught_2747658",
+      "name": "Mahi mahi, frozen, wild caught",
+      "p": 0.198,
+      "c": 0.0029,
+      "f": 0.0038
+    },
+    {
+      "id": "pork_chop_center_cut_raw_2727575",
+      "name": "Pork, chop, center cut, raw",
+      "p": 0.228,
+      "c": -0.0056,
+      "f": 0.0548
+    },
+    {
+      "id": "pork_loin_tenderloin_boneless_raw_2646169",
+      "name": "Pork, loin, tenderloin, boneless, raw",
+      "p": 0.216,
+      "c": 0.0,
+      "f": 0.039
+    },
+    {
+      "id": "scallops_bay_patagonian_frozen_wild_caug_2747666",
+      "name": "Scallops, bay, Patagonian, frozen, wild caught",
+      "p": 0.164,
+      "c": 0.0228,
+      "f": 0.0042
+    },
+    {
+      "id": "scallops_sea_frozen_wild_caught_2747667",
+      "name": "Scallops, sea, frozen, wild caught",
+      "p": 0.135,
+      "c": 0.0197,
+      "f": 0.0049
+    },
+    {
+      "id": "snapper_frozen_wild_caught_2747669",
+      "name": "Snapper, frozen, wild caught",
+      "p": 0.207,
+      "c": 0.0044,
+      "f": 0.0057
+    },
+    {
+      "id": "snow_crab_legs_only_frozen_2747670",
+      "name": "Snow crab, legs only, frozen  ",
+      "p": 0.155,
+      "c": 0.0111,
+      "f": 0.0029
+    },
+    {
+      "id": "spinach_baby_1999632",
+      "name": "Spinach, baby",
+      "p": 0.0285,
+      "c": 0.0241,
+      "f": 0.0062
+    },
+    {
+      "id": "spinach_mature_1999633",
+      "name": "Spinach, mature",
+      "p": 0.0291,
+      "c": 0.0264,
+      "f": 0.006
+    },
+    {
+      "id": "squid_calamari_frozen_tubes_only_2747671",
+      "name": "Squid (calamari), frozen, tubes only",
+      "p": 0.0881,
+      "c": 0.0093,
+      "f": 0.0055
+    },
+    {
+      "id": "swordfish_frozen_wild_caught_2747672",
+      "name": "Swordfish, frozen, wild caught",
+      "p": 0.192,
+      "c": 0.0045,
+      "f": 0.0812
+    },
+    {
+      "id": "tuna_ahi_or_yellowfin_frozen_wild_caught_2747673",
+      "name": "Tuna, ahi or yellowfin, frozen, wild caught",
+      "p": 0.247,
+      "c": -0.001,
+      "f": 0.0039
+    },
+    {
+      "id": "turkey_ground_93_lean_7_fat_pan_broiled__746785",
+      "name": "Turkey, ground, 93% lean, 7% fat, pan-broiled crumbles",
+      "p": 0.271,
+      "c": 0.0,
+      "f": 0.116
+    },
+    {
+      "id": "yogurt_greek_plain_nonfat_330137",
+      "name": "Yogurt, Greek, plain, nonfat",
+      "p": 0.103,
+      "c": 0.0364,
+      "f": 0.0037
+    }
+  ],
+  "carb": [
+    {
+      "id": "apple_juice_with_added_vitamin_c_from_co_2003590",
+      "name": "Apple juice, with added vitamin C, from concentrate, shelf stable",
+      "p": 0.0009,
+      "c": 0.114,
+      "f": 0.0029
+    },
+    {
+      "id": "apples_fuji_with_skin_raw_1750340",
+      "name": "Apples, fuji, with skin, raw",
+      "p": 0.0015,
+      "c": 0.157,
+      "f": 0.0016
+    },
+    {
+      "id": "apples_gala_with_skin_raw_1750341",
+      "name": "Apples, gala, with skin, raw",
+      "p": 0.0013,
+      "c": 0.148,
+      "f": 0.0015
+    },
+    {
+      "id": "apples_granny_smith_with_skin_raw_1750342",
+      "name": "Apples, granny smith, with skin, raw",
+      "p": 0.0027,
+      "c": 0.141,
+      "f": 0.0014
+    },
+    {
+      "id": "apples_honeycrisp_with_skin_raw_1750343",
+      "name": "Apples, honeycrisp, with skin, raw",
+      "p": 0.001,
+      "c": 0.147,
+      "f": 0.001
+    },
+    {
+      "id": "apples_red_delicious_with_skin_raw_1750339",
+      "name": "Apples, red delicious, with skin, raw",
+      "p": 0.0019,
+      "c": 0.148,
+      "f": 0.0021
+    },
+    {
+      "id": "applesauce_unsweetened_with_added_vitami_2346414",
+      "name": "Applesauce, unsweetened, with added vitamin C",
+      "p": 0.0027,
+      "c": 0.123,
+      "f": 0.0016
+    },
+    {
+      "id": "apricot_with_skin_raw_2710815",
+      "name": "Apricot, with skin, raw",
+      "p": 0.0096,
+      "c": 0.102,
+      "f": 0.0041
+    },
+    {
+      "id": "arugula_baby_raw_2710822",
+      "name": "Arugula, baby, raw",
+      "p": 0.0165,
+      "c": 0.0537,
+      "f": 0.0033
+    },
+    {
+      "id": "asparagus_green_raw_2710823",
+      "name": "Asparagus, green, raw",
+      "p": 0.0144,
+      "c": 0.051,
+      "f": 0.0022
+    },
+    {
+      "id": "bananas_overripe_raw_1105073",
+      "name": "Bananas, overripe, raw",
+      "p": 0.0073,
+      "c": 0.201,
+      "f": 0.0022
+    },
+    {
+      "id": "bananas_ripe_and_slightly_ripe_raw_1105314",
+      "name": "Bananas, ripe and slightly ripe, raw",
+      "p": 0.0074,
+      "c": 0.23,
+      "f": 0.0029
+    },
+    {
+      "id": "beans_black_canned_sodium_added_drained__2644285",
+      "name": "Beans, black, canned, sodium added, drained and rinsed",
+      "p": 0.0691,
+      "c": 0.198,
+      "f": 0.0127
+    },
+    {
+      "id": "beans_cannellini_canned_sodium_added_dra_2644287",
+      "name": "Beans, cannellini, canned, sodium added, drained and rinsed",
+      "p": 0.0741,
+      "c": 0.188,
+      "f": 0.0117
+    },
+    {
+      "id": "beans_cannellini_dry_2644281",
+      "name": "Beans, cannellini, dry",
+      "p": 0.216,
+      "c": 0.598,
+      "f": 0.022
+    },
+    {
+      "id": "beans_great_northern_canned_sodium_added_2644294",
+      "name": "Beans, great northern, canned, sodium added, drained and rinsed",
+      "p": 0.0703,
+      "c": 0.193,
+      "f": 0.0127
+    },
+    {
+      "id": "beans_kidney_dark_red_canned_sodium_adde_2644289",
+      "name": "Beans, kidney, dark red, canned, sodium added, sugar added, drained and rinsed",
+      "p": 0.078,
+      "c": 0.21,
+      "f": 0.0126
+    },
+    {
+      "id": "beans_kidney_light_red_canned_sodium_add_2644290",
+      "name": "Beans, kidney, light red, canned, sodium added, sugar added, drained and rinsed",
+      "p": 0.0731,
+      "c": 0.214,
+      "f": 0.013
+    },
+    {
+      "id": "beans_navy_canned_sodium_added_drained_a_2644286",
+      "name": "Beans, navy, canned, sodium added, drained and rinsed",
+      "p": 0.0657,
+      "c": 0.2,
+      "f": 0.014
+    },
+    {
+      "id": "beans_pinto_canned_sodium_added_drained__2644292",
+      "name": "Beans, pinto, canned, sodium added, drained and rinsed",
+      "p": 0.0669,
+      "c": 0.196,
+      "f": 0.0127
+    },
+    {
+      "id": "beans_snap_green_canned_regular_pack_dra_321611",
+      "name": "Beans, snap, green, canned, regular pack, drained solids",
+      "p": 0.0104,
+      "c": 0.0411,
+      "f": 0.0039
+    },
+    {
+      "id": "beans_snap_green_raw_2346400",
+      "name": "Beans, snap, green, raw",
+      "p": 0.0197,
+      "c": 0.0741,
+      "f": 0.0028
+    },
+    {
+      "id": "beet_greens_raw_2747653",
+      "name": "Beet greens, raw",
+      "p": 0.0161,
+      "c": 0.0466,
+      "f": 0.0014
+    },
+    {
+      "id": "beets_raw_2685576",
+      "name": "Beets, raw",
+      "p": 0.0169,
+      "c": 0.0879,
+      "f": 0.003
+    },
+    {
+      "id": "blackeye_pea_canned_sodium_added_drained_2644293",
+      "name": "Blackeye pea, canned, sodium added, drained and rinsed",
+      "p": 0.0692,
+      "c": 0.192,
+      "f": 0.013
+    },
+    {
+      "id": "blackeye_pea_dry_2644284",
+      "name": "Blackeye pea, dry",
+      "p": 0.212,
+      "c": 0.618,
+      "f": 0.0242
+    },
+    {
+      "id": "blueberries_raw_2346411",
+      "name": "Blueberries, raw",
+      "p": 0.007,
+      "c": 0.146,
+      "f": 0.0031
+    },
+    {
+      "id": "broccoli_raw_747447",
+      "name": "Broccoli, raw",
+      "p": 0.0257,
+      "c": 0.0627,
+      "f": 0.0034
+    },
+    {
+      "id": "brussels_sprouts_raw_2685575",
+      "name": "Brussels sprouts, raw",
+      "p": 0.0398,
+      "c": 0.0962,
+      "f": 0.0056
+    },
+    {
+      "id": "buckwheat_whole_grain_2512378",
+      "name": "Buckwheat, whole grain",
+      "p": 0.111,
+      "c": 0.711,
+      "f": 0.0304
+    },
+    {
+      "id": "bulgur_dry_raw_2710820",
+      "name": "Bulgur, dry, raw",
+      "p": 0.118,
+      "c": 0.759,
+      "f": 0.0242
+    },
+    {
+      "id": "buttermilk_low_fat_2259792",
+      "name": "Buttermilk, low fat",
+      "p": 0.0346,
+      "c": 0.0481,
+      "f": 0.0108
+    },
+    {
+      "id": "cabbage_bok_choy_raw_2685572",
+      "name": "Cabbage, bok choy, raw",
+      "p": 0.0102,
+      "c": 0.0351,
+      "f": 0.0023
+    },
+    {
+      "id": "cabbage_green_raw_2346407",
+      "name": "Cabbage, green, raw",
+      "p": 0.0096,
+      "c": 0.0638,
+      "f": 0.0023
+    },
+    {
+      "id": "cabbage_red_raw_2346408",
+      "name": "Cabbage, red, raw",
+      "p": 0.0124,
+      "c": 0.0679,
+      "f": 0.0021
+    },
+    {
+      "id": "carrots_baby_raw_2258587",
+      "name": "Carrots, baby, raw",
+      "p": 0.008,
+      "c": 0.0908,
+      "f": 0.0014
+    },
+    {
+      "id": "carrots_frozen_unprepared_746764",
+      "name": "Carrots, frozen, unprepared",
+      "p": 0.0081,
+      "c": 0.0792,
+      "f": 0.0047
+    },
+    {
+      "id": "carrots_mature_raw_2258586",
+      "name": "Carrots, mature, raw",
+      "p": 0.0094,
+      "c": 0.103,
+      "f": 0.0035
+    },
+    {
+      "id": "cauliflower_raw_2685573",
+      "name": "Cauliflower, raw",
+      "p": 0.0164,
+      "c": 0.0472,
+      "f": 0.0024
+    },
+    {
+      "id": "celery_raw_2346405",
+      "name": "Celery, raw",
+      "p": 0.0049,
+      "c": 0.0332,
+      "f": 0.0016
+    },
+    {
+      "id": "cherries_sweet_dark_red_raw_2346399",
+      "name": "Cherries, sweet, dark red, raw",
+      "p": 0.0104,
+      "c": 0.162,
+      "f": 0.0019
+    },
+    {
+      "id": "chickpeas_garbanzo_beans_bengal_gram_can_2644288",
+      "name": "Chickpeas (garbanzo beans, bengal gram), canned, sodium added, drained and rinsed",
+      "p": 0.0702,
+      "c": 0.203,
+      "f": 0.031
+    },
+    {
+      "id": "chickpeas_garbanzo_beans_bengal_gram_dry_2644282",
+      "name": "Chickpeas, (garbanzo beans, bengal gram), dry",
+      "p": 0.213,
+      "c": 0.604,
+      "f": 0.0627
+    },
+    {
+      "id": "collards_raw_2685574",
+      "name": "Collards, raw",
+      "p": 0.0297,
+      "c": 0.0702,
+      "f": 0.0077
+    },
+    {
+      "id": "cookies_oatmeal_soft_with_raisins_333008",
+      "name": "Cookies, oatmeal, soft, with raisins",
+      "p": 0.0579,
+      "c": 0.696,
+      "f": 0.143
+    },
+    {
+      "id": "corn_flour_masa_harina_white_or_yellow_d_2710835",
+      "name": "Corn flour, masa harina, white or yellow, dry, raw",
+      "p": 0.0756,
+      "c": 0.767,
+      "f": 0.0434
+    },
+    {
+      "id": "corn_sweet_yellow_and_white_kernels_fres_2710826",
+      "name": "Corn, sweet, yellow and white kernels, \u00a0fresh, raw",
+      "p": 0.0279,
+      "c": 0.147,
+      "f": 0.0163
+    },
+    {
+      "id": "cranberry_juice_not_fortified_from_conce_2003594",
+      "name": "Cranberry juice, not fortified, from concentrate, shelf stable",
+      "p": 0.0,
+      "c": 0.0726,
+      "f": 0.0034
+    },
+    {
+      "id": "cucumber_with_peel_raw_2346406",
+      "name": "Cucumber, with peel, raw",
+      "p": 0.0063,
+      "c": 0.0295,
+      "f": 0.0018
+    },
+    {
+      "id": "eggplant_raw_2685577",
+      "name": "Eggplant, raw",
+      "p": 0.0085,
+      "c": 0.054,
+      "f": 0.0012
+    },
+    {
+      "id": "einkorn_grain_dry_raw_2710827",
+      "name": "Einkorn, grain, dry, raw",
+      "p": 0.151,
+      "c": 0.687,
+      "f": 0.0381
+    },
+    {
+      "id": "farro_pearled_dry_raw_2710828",
+      "name": "Farro, pearled, dry, raw",
+      "p": 0.126,
+      "c": 0.721,
+      "f": 0.031
+    },
+    {
+      "id": "fennel_bulb_raw_2747655",
+      "name": "Fennel, bulb, raw",
+      "p": 0.0092,
+      "c": 0.0549,
+      "f": 0.0014
+    },
+    {
+      "id": "figs_dried_uncooked_746768",
+      "name": "Figs, dried, uncooked",
+      "p": 0.033,
+      "c": 0.639,
+      "f": 0.0092
+    },
+    {
+      "id": "flour_00_2003586",
+      "name": "Flour, 00",
+      "p": 0.114,
+      "c": 0.744,
+      "f": 0.0152
+    },
+    {
+      "id": "flour_amaranth_2512371",
+      "name": "Flour, amaranth",
+      "p": 0.132,
+      "c": 0.688,
+      "f": 0.0624
+    },
+    {
+      "id": "flour_barley_2512376",
+      "name": "Flour, barley",
+      "p": 0.0872,
+      "c": 0.774,
+      "f": 0.0245
+    },
+    {
+      "id": "flour_bread_white_enriched_unbleached_790146",
+      "name": "Flour, bread, white, enriched, unbleached",
+      "p": 0.143,
+      "c": 0.728,
+      "f": 0.0165
+    },
+    {
+      "id": "flour_buckwheat_2512374",
+      "name": "Flour, buckwheat",
+      "p": 0.0888,
+      "c": 0.75,
+      "f": 0.0248
+    },
+    {
+      "id": "flour_cassava_2512377",
+      "name": "Flour, cassava",
+      "p": 0.0092,
+      "c": 0.873,
+      "f": 0.0049
+    },
+    {
+      "id": "flour_chestnut_2515377",
+      "name": "Flour, chestnut",
+      "p": 0.0529,
+      "c": 0.805,
+      "f": 0.0464
+    },
+    {
+      "id": "flour_coconut_2515382",
+      "name": "Flour, coconut",
+      "p": 0.161,
+      "c": 0.589,
+      "f": 0.153
+    },
+    {
+      "id": "flour_corn_yellow_fine_meal_enriched_790276",
+      "name": "Flour, corn, yellow, fine meal, enriched",
+      "p": 0.062,
+      "c": 0.808,
+      "f": 0.0174
+    },
+    {
+      "id": "flour_oat_whole_grain_2261421",
+      "name": "Flour, oat, whole grain",
+      "p": 0.132,
+      "c": 0.699,
+      "f": 0.0631
+    },
+    {
+      "id": "flour_pastry_unenriched_unbleached_1104913",
+      "name": "Flour, pastry, unenriched, unbleached",
+      "p": 0.0875,
+      "c": 0.772,
+      "f": 0.0164
+    },
+    {
+      "id": "flour_potato_2261422",
+      "name": "Flour, potato",
+      "p": 0.0811,
+      "c": 0.799,
+      "f": 0.0095
+    },
+    {
+      "id": "flour_quinoa_2512372",
+      "name": "Flour, quinoa",
+      "p": 0.119,
+      "c": 0.695,
+      "f": 0.066
+    },
+    {
+      "id": "flour_rice_brown_1104812",
+      "name": "Flour, rice, brown",
+      "p": 0.0719,
+      "c": 0.755,
+      "f": 0.0385
+    },
+    {
+      "id": "flour_rice_glutinous_1104867",
+      "name": "Flour, rice, glutinous",
+      "p": 0.0669,
+      "c": 0.801,
+      "f": 0.0116
+    },
+    {
+      "id": "flour_rice_white_unenriched_790214",
+      "name": "Flour, rice, white, unenriched",
+      "p": 0.0694,
+      "c": 0.798,
+      "f": 0.013
+    },
+    {
+      "id": "flour_rye_2512375",
+      "name": "Flour, rye",
+      "p": 0.084,
+      "c": 0.772,
+      "f": 0.0191
+    },
+    {
+      "id": "flour_semolina_coarse_and_semi_coarse_2003588",
+      "name": "Flour, semolina, coarse and semi-coarse",
+      "p": 0.117,
+      "c": 0.738,
+      "f": 0.016
+    },
+    {
+      "id": "flour_semolina_fine_2003589",
+      "name": "Flour, semolina, fine",
+      "p": 0.133,
+      "c": 0.72,
+      "f": 0.0184
+    },
+    {
+      "id": "flour_sorghum_2512373",
+      "name": "Flour, sorghum",
+      "p": 0.0827,
+      "c": 0.774,
+      "f": 0.0359
+    },
+    {
+      "id": "flour_spelt_whole_grain_2003587",
+      "name": "Flour, spelt, whole grain",
+      "p": 0.145,
+      "c": 0.707,
+      "f": 0.0254
+    },
+    {
+      "id": "flour_wheat_all_purpose_enriched_bleache_789890",
+      "name": "Flour, wheat, all-purpose, enriched, bleached",
+      "p": 0.109,
+      "c": 0.773,
+      "f": 0.0148
+    },
+    {
+      "id": "flour_wheat_all_purpose_enriched_unbleac_789951",
+      "name": "Flour, wheat, all-purpose, enriched, unbleached",
+      "p": 0.131,
+      "c": 0.732,
+      "f": 0.0148
+    },
+    {
+      "id": "flour_wheat_all_purpose_unenriched_unble_790018",
+      "name": "Flour, wheat, all-purpose, unenriched, unbleached",
+      "p": 0.12,
+      "c": 0.746,
+      "f": 0.017
+    },
+    {
+      "id": "flour_whole_wheat_unenriched_790085",
+      "name": "Flour, whole wheat, unenriched",
+      "p": 0.151,
+      "c": 0.712,
+      "f": 0.0273
+    },
+    {
+      "id": "fonio_grain_dry_raw_2710829",
+      "name": "Fonio, grain, dry, raw",
+      "p": 0.0717,
+      "c": 0.813,
+      "f": 0.0169
+    },
+    {
+      "id": "garlic_raw_1104647",
+      "name": "Garlic, raw",
+      "p": 0.0662,
+      "c": 0.282,
+      "f": 0.0038
+    },
+    {
+      "id": "grape_juice_purple_with_added_vitamin_c__2003592",
+      "name": "Grape juice, purple, with added vitamin C, from concentrate, shelf stable",
+      "p": 0.0026,
+      "c": 0.156,
+      "f": 0.0029
+    },
+    {
+      "id": "grape_juice_white_with_added_vitamin_c_f_2003593",
+      "name": "Grape juice, white, with added vitamin C, from concentrate, shelf stable",
+      "p": 0.0009,
+      "c": 0.158,
+      "f": 0.0027
+    },
+    {
+      "id": "grapefruit_juice_red_not_fortified_not_f_2003595",
+      "name": "Grapefruit juice, red, not fortified, not from concentrate, refrigerated",
+      "p": 0.0057,
+      "c": 0.091,
+      "f": 0.0027
+    },
+    {
+      "id": "grapefruit_juice_white_canned_or_bottled_325287",
+      "name": "Grapefruit juice, white, canned or bottled, unsweetened",
+      "p": 0.0055,
+      "c": 0.0759,
+      "f": 0.007
+    },
+    {
+      "id": "grapes_green_seedless_raw_2346413",
+      "name": "Grapes, green, seedless, raw",
+      "p": 0.009,
+      "c": 0.186,
+      "f": 0.0023
+    },
+    {
+      "id": "grapes_red_seedless_raw_2346412",
+      "name": "Grapes, red, seedless, raw",
+      "p": 0.0091,
+      "c": 0.202,
+      "f": 0.0016
+    },
+    {
+      "id": "kale_frozen_cooked_boiled_drained_withou_326196",
+      "name": "Kale, frozen, cooked, boiled, drained, without salt",
+      "p": 0.0294,
+      "c": 0.053,
+      "f": 0.0121
+    },
+    {
+      "id": "kale_raw_323505",
+      "name": "Kale, raw",
+      "p": 0.0292,
+      "c": 0.0442,
+      "f": 0.0149
+    },
+    {
+      "id": "ketchup_restaurant_747693",
+      "name": "Ketchup, restaurant",
+      "p": 0.0111,
+      "c": 0.268,
+      "f": 0.0055
+    },
+    {
+      "id": "khorasan_grain_dry_raw_2710830",
+      "name": "Khorasan, grain, dry, raw",
+      "p": 0.148,
+      "c": 0.718,
+      "f": 0.028
+    },
+    {
+      "id": "kiwifruit_kiwi_green_peeled_raw_2710831",
+      "name": "Kiwifruit (kiwi), green, peeled, raw",
+      "p": 0.0101,
+      "c": 0.138,
+      "f": 0.0064
+    },
+    {
+      "id": "kiwifruit_green_raw_327046",
+      "name": "Kiwifruit, green, raw",
+      "p": 0.0106,
+      "c": 0.14,
+      "f": 0.0044
+    },
+    {
+      "id": "lentils_dry_2644283",
+      "name": "Lentils, dry",
+      "p": 0.236,
+      "c": 0.622,
+      "f": 0.0192
+    },
+    {
+      "id": "lettuce_cos_or_romaine_raw_746769",
+      "name": "Lettuce, cos or romaine, raw",
+      "p": 0.0124,
+      "c": 0.0324,
+      "f": 0.0026
+    },
+    {
+      "id": "lettuce_iceberg_raw_2346388",
+      "name": "Lettuce, iceberg, raw",
+      "p": 0.0074,
+      "c": 0.0337,
+      "f": 0.0007
+    },
+    {
+      "id": "lettuce_leaf_green_raw_2346391",
+      "name": "Lettuce, leaf, green, raw",
+      "p": 0.0109,
+      "c": 0.0407,
+      "f": 0.0016
+    },
+    {
+      "id": "lettuce_leaf_red_raw_2346390",
+      "name": "Lettuce, leaf, red, raw",
+      "p": 0.0088,
+      "c": 0.0326,
+      "f": 0.0011
+    },
+    {
+      "id": "lettuce_romaine_green_raw_2346389",
+      "name": "Lettuce, romaine, green, raw",
+      "p": 0.0098,
+      "c": 0.0406,
+      "f": 0.0007
+    },
+    {
+      "id": "mandarin_seedless_peeled_raw_2710832",
+      "name": "Mandarin, seedless, peeled, raw",
+      "p": 0.0104,
+      "c": 0.134,
+      "f": 0.0046
+    },
+    {
+      "id": "mango_ataulfo_peeled_raw_2710834",
+      "name": "Mango, Ataulfo, peeled, raw",
+      "p": 0.0069,
+      "c": 0.174,
+      "f": 0.0068
+    },
+    {
+      "id": "mango_tommy_atkins_peeled_raw_2710833",
+      "name": "Mango, Tommy Atkins, peeled, raw",
+      "p": 0.0056,
+      "c": 0.153,
+      "f": 0.0057
+    },
+    {
+      "id": "melons_cantaloupe_raw_746770",
+      "name": "Melons, cantaloupe, raw",
+      "p": 0.0082,
+      "c": 0.0816,
+      "f": 0.0018
+    },
+    {
+      "id": "melons_honeydew_raw_2710816",
+      "name": "Melons, honeydew, raw",
+      "p": 0.0053,
+      "c": 0.0815,
+      "f": 0.0022
+    },
+    {
+      "id": "milk_lowfat_fluid_1_milkfat_with_added_v_746772",
+      "name": "Milk, lowfat, fluid, 1% milkfat, with added vitamin A and vitamin D",
+      "p": 0.0338,
+      "c": 0.0518,
+      "f": 0.0095
+    },
+    {
+      "id": "milk_nonfat_fluid_with_added_vitamin_a_a_746776",
+      "name": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+      "p": 0.0343,
+      "c": 0.0492,
+      "f": 0.0008
+    },
+    {
+      "id": "milk_reduced_fat_fluid_2_milkfat_with_ad_746778",
+      "name": "Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D",
+      "p": 0.0336,
+      "c": 0.049,
+      "f": 0.019
+    },
+    {
+      "id": "millet_whole_grain_2512379",
+      "name": "Millet, whole grain",
+      "p": 0.1,
+      "c": 0.744,
+      "f": 0.0419
+    },
+    {
+      "id": "mushroom_beech_2003603",
+      "name": "Mushroom, beech",
+      "p": 0.0218,
+      "c": 0.0676,
+      "f": 0.0045
+    },
+    {
+      "id": "mushroom_crimini_2003601",
+      "name": "Mushroom, crimini",
+      "p": 0.0309,
+      "c": 0.0401,
+      "f": 0.002
+    },
+    {
+      "id": "mushroom_enoki_2003600",
+      "name": "Mushroom, enoki",
+      "p": 0.0242,
+      "c": 0.0814,
+      "f": 0.0024
+    },
+    {
+      "id": "mushroom_king_oyster_2003599",
+      "name": "Mushroom, king oyster",
+      "p": 0.0241,
+      "c": 0.085,
+      "f": 0.0031
+    },
+    {
+      "id": "mushroom_lion_s_mane_1999626",
+      "name": "Mushroom, lion's mane",
+      "p": 0.025,
+      "c": 0.0759,
+      "f": 0.0026
+    },
+    {
+      "id": "mushroom_maitake_2003602",
+      "name": "Mushroom, maitake",
+      "p": 0.022,
+      "c": 0.066,
+      "f": 0.0027
+    },
+    {
+      "id": "mushroom_oyster_1999627",
+      "name": "Mushroom, oyster",
+      "p": 0.029,
+      "c": 0.0694,
+      "f": 0.0019
+    },
+    {
+      "id": "mushroom_pioppini_2003604",
+      "name": "Mushroom, pioppini",
+      "p": 0.035,
+      "c": 0.0576,
+      "f": 0.0024
+    },
+    {
+      "id": "mushroom_portabella_2003598",
+      "name": "Mushroom, portabella",
+      "p": 0.0275,
+      "c": 0.0466,
+      "f": 0.0031
+    },
+    {
+      "id": "mushrooms_shiitake_1999628",
+      "name": "Mushrooms, shiitake",
+      "p": 0.0241,
+      "c": 0.0817,
+      "f": 0.002
+    },
+    {
+      "id": "mushrooms_white_button_1999629",
+      "name": "Mushrooms, white button",
+      "p": 0.0289,
+      "c": 0.0408,
+      "f": 0.0037
+    },
+    {
+      "id": "nectarines_raw_327357",
+      "name": "Nectarines, raw",
+      "p": 0.0106,
+      "c": 0.0918,
+      "f": 0.0028
+    },
+    {
+      "id": "oats_whole_grain_rolled_old_fashioned_2346396",
+      "name": "Oats, whole grain, rolled, old fashioned",
+      "p": 0.135,
+      "c": 0.687,
+      "f": 0.0589
+    },
+    {
+      "id": "oats_whole_grain_steel_cut_2346397",
+      "name": "Oats, whole grain, steel cut",
+      "p": 0.125,
+      "c": 0.698,
+      "f": 0.058
+    },
+    {
+      "id": "onion_rings_breaded_par_fried_frozen_pre_324317",
+      "name": "Onion rings, breaded, par fried, frozen, prepared, heated in oven",
+      "p": 0.0452,
+      "c": 0.363,
+      "f": 0.144
+    },
+    {
+      "id": "onions_red_raw_790577",
+      "name": "Onions, red, raw",
+      "p": 0.0094,
+      "c": 0.0993,
+      "f": 0.001
+    },
+    {
+      "id": "onions_white_raw_1104962",
+      "name": "Onions, white, raw",
+      "p": 0.0089,
+      "c": 0.0768,
+      "f": 0.0013
+    },
+    {
+      "id": "onions_yellow_raw_790646",
+      "name": "Onions, yellow, raw",
+      "p": 0.0083,
+      "c": 0.0861,
+      "f": 0.0005
+    },
+    {
+      "id": "orange_juice_no_pulp_not_fortified_from__2003591",
+      "name": "Orange juice, no pulp, not fortified, from concentrate, refrigerated",
+      "p": 0.0073,
+      "c": 0.103,
+      "f": 0.0033
+    },
+    {
+      "id": "orange_juice_no_pulp_not_fortified_not_f_2003597",
+      "name": "Orange juice, no pulp, not fortified, not from concentrate, refrigerated",
+      "p": 0.0081,
+      "c": 0.1,
+      "f": 0.0036
+    },
+    {
+      "id": "oranges_raw_navels_746771",
+      "name": "Oranges, raw, navels",
+      "p": 0.0091,
+      "c": 0.118,
+      "f": 0.0015
+    },
+    {
+      "id": "parsnips_raw_2747659",
+      "name": "Parsnips, raw",
+      "p": 0.0127,
+      "c": 0.193,
+      "f": 0.0054
+    },
+    {
+      "id": "peaches_yellow_raw_325430",
+      "name": "Peaches, yellow, raw",
+      "p": 0.0091,
+      "c": 0.101,
+      "f": 0.0027
+    },
+    {
+      "id": "pear_anjou_green_with_skin_raw_2710836",
+      "name": "Pear, Anjou, green, with skin, raw",
+      "p": 0.0031,
+      "c": 0.148,
+      "f": 0.0037
+    },
+    {
+      "id": "pears_raw_bartlett_746773",
+      "name": "Pears, raw, bartlett",
+      "p": 0.0038,
+      "c": 0.151,
+      "f": 0.0016
+    },
+    {
+      "id": "peas_green_sweet_canned_sodium_added_sug_2644291",
+      "name": "Peas, green, sweet, canned, sodium added, sugar added, drained and rinsed",
+      "p": 0.0473,
+      "c": 0.127,
+      "f": 0.0115
+    },
+    {
+      "id": "peppers_banana_or_hungarian_wax_seeded_r_2747660",
+      "name": "Peppers, banana or Hungarian wax, seeded, raw",
+      "p": 0.0072,
+      "c": 0.0497,
+      "f": 0.0013
+    },
+    {
+      "id": "peppers_bell_green_raw_2258588",
+      "name": "Peppers, bell, green, raw",
+      "p": 0.0072,
+      "c": 0.0478,
+      "f": 0.0011
+    },
+    {
+      "id": "peppers_bell_orange_raw_2258591",
+      "name": "Peppers, bell, orange, raw",
+      "p": 0.0088,
+      "c": 0.067,
+      "f": 0.0016
+    },
+    {
+      "id": "peppers_bell_red_raw_2258590",
+      "name": "Peppers, bell, red, raw",
+      "p": 0.009,
+      "c": 0.0665,
+      "f": 0.0013
+    },
+    {
+      "id": "peppers_bell_yellow_raw_2258589",
+      "name": "Peppers, bell, yellow, raw",
+      "p": 0.0082,
+      "c": 0.066,
+      "f": 0.0012
+    },
+    {
+      "id": "peppers_jalapeno_seeded_raw_2747661",
+      "name": "Peppers, jalapeno, seeded, raw",
+      "p": 0.0062,
+      "c": 0.0508,
+      "f": 0.0015
+    },
+    {
+      "id": "peppers_poblano_seeded_raw_2747662",
+      "name": "Peppers, poblano, seeded, raw",
+      "p": 0.0143,
+      "c": 0.0514,
+      "f": 0.0019
+    },
+    {
+      "id": "peppers_serrano_seeded_raw_2747663",
+      "name": "Peppers, serrano, seeded, raw",
+      "p": 0.0086,
+      "c": 0.0614,
+      "f": 0.0014
+    },
+    {
+      "id": "pickles_cucumber_dill_or_kosher_dill_324653",
+      "name": "Pickles, cucumber, dill or kosher dill",
+      "p": 0.0048,
+      "c": 0.0199,
+      "f": 0.0043
+    },
+    {
+      "id": "pineapple_raw_2346398",
+      "name": "Pineapple, raw",
+      "p": 0.0046,
+      "c": 0.141,
+      "f": 0.0021
+    },
+    {
+      "id": "plantains_overripe_raw_2710843",
+      "name": "Plantains, overripe, raw",
+      "p": 0.0117,
+      "c": 0.292,
+      "f": 0.0099
+    },
+    {
+      "id": "plantains_ripe_raw_2710817",
+      "name": "Plantains, ripe, raw",
+      "p": 0.0116,
+      "c": 0.31,
+      "f": 0.0089
+    },
+    {
+      "id": "plantains_underripe_raw_2710818",
+      "name": "Plantains, underripe, raw",
+      "p": 0.0123,
+      "c": 0.336,
+      "f": 0.0069
+    },
+    {
+      "id": "plum_black_with_skin_raw_2710837",
+      "name": "Plum, black, with skin, raw",
+      "p": 0.0058,
+      "c": 0.135,
+      "f": 0.0028
+    },
+    {
+      "id": "potatoes_gold_without_skin_raw_2346403",
+      "name": "Potatoes, gold, without skin, raw",
+      "p": 0.0181,
+      "c": 0.16,
+      "f": 0.0026
+    },
+    {
+      "id": "potatoes_red_without_skin_raw_2346402",
+      "name": "Potatoes, red, without skin, raw",
+      "p": 0.0206,
+      "c": 0.163,
+      "f": 0.0025
+    },
+    {
+      "id": "potatoes_russet_without_skin_raw_2346401",
+      "name": "Potatoes, russet, without skin, raw",
+      "p": 0.0227,
+      "c": 0.178,
+      "f": 0.0036
+    },
+    {
+      "id": "radicchio_raw_2747664",
+      "name": "Radicchio, raw",
+      "p": 0.0131,
+      "c": 0.0496,
+      "f": 0.0014
+    },
+    {
+      "id": "radishes_red_raw_2747665",
+      "name": "Radishes, red, raw",
+      "p": 0.0066,
+      "c": 0.0406,
+      "f": 0.0008
+    },
+    {
+      "id": "raspberries_raw_2346410",
+      "name": "Raspberries, raw",
+      "p": 0.0101,
+      "c": 0.129,
+      "f": 0.0019
+    },
+    {
+      "id": "restaurant_chinese_fried_rice_without_me_334536",
+      "name": "Restaurant, Chinese, fried rice, without meat",
+      "p": 0.0384,
+      "c": 0.325,
+      "f": 0.0319
+    },
+    {
+      "id": "restaurant_latino_pupusas_con_frijoles_p_334720",
+      "name": "Restaurant, Latino, pupusas con frijoles (pupusas, bean)",
+      "p": 0.0559,
+      "c": 0.315,
+      "f": 0.0901
+    },
+    {
+      "id": "rice_black_unenriched_raw_2710825",
+      "name": "Rice, black, unenriched, raw",
+      "p": 0.0757,
+      "c": 0.772,
+      "f": 0.0344
+    },
+    {
+      "id": "rice_brown_long_grain_unenriched_raw_2512380",
+      "name": "Rice, brown, long grain, unenriched, raw",
+      "p": 0.0725,
+      "c": 0.767,
+      "f": 0.0331
+    },
+    {
+      "id": "rice_red_unenriched_dry_raw_2710838",
+      "name": "Rice, red, unenriched, dry, raw",
+      "p": 0.0856,
+      "c": 0.762,
+      "f": 0.0344
+    },
+    {
+      "id": "rice_white_long_grain_unenriched_raw_2512381",
+      "name": "Rice, white, long grain, unenriched, raw",
+      "p": 0.0704,
+      "c": 0.803,
+      "f": 0.0103
+    },
+    {
+      "id": "sauce_pasta_spaghetti_marinara_ready_to__332282",
+      "name": "Sauce, pasta, spaghetti/marinara, ready-to-serve",
+      "p": 0.0141,
+      "c": 0.0805,
+      "f": 0.0148
+    },
+    {
+      "id": "sauce_salsa_ready_to_serve_746777",
+      "name": "Sauce, salsa, ready-to-serve",
+      "p": 0.0144,
+      "c": 0.0674,
+      "f": 0.0019
+    },
+    {
+      "id": "sorghum_bran_white_unenriched_dry_raw_2710839",
+      "name": "Sorghum bran, white, unenriched, dry, raw",
+      "p": 0.112,
+      "c": 0.687,
+      "f": 0.0926
+    },
+    {
+      "id": "sorghum_flour_white_pearled_unenriched_d_2710840",
+      "name": "Sorghum flour, white, pearled, unenriched, dry, raw",
+      "p": 0.102,
+      "c": 0.735,
+      "f": 0.0324
+    },
+    {
+      "id": "sorghum_grain_white_pearled_unenriched_d_2710841",
+      "name": "Sorghum grain, white, pearled, unenriched, dry, raw",
+      "p": 0.102,
+      "c": 0.749,
+      "f": 0.0326
+    },
+    {
+      "id": "sorghum_whole_grain_white_dry_raw_2710842",
+      "name": "Sorghum, whole grain, white, dry, raw",
+      "p": 0.101,
+      "c": 0.736,
+      "f": 0.0422
+    },
+    {
+      "id": "squash_summer_green_zucchini_includes_sk_2685568",
+      "name": "Squash, summer, green, zucchini, includes skin, raw",
+      "p": 0.0098,
+      "c": 0.0327,
+      "f": 0.002
+    },
+    {
+      "id": "squash_summer_yellow_includes_skin_raw_2685569",
+      "name": "Squash, summer, yellow, includes skin, raw",
+      "p": 0.0089,
+      "c": 0.0439,
+      "f": 0.0014
+    },
+    {
+      "id": "squash_winter_acorn_raw_2685571",
+      "name": "Squash, winter, acorn, raw",
+      "p": 0.0125,
+      "c": 0.105,
+      "f": 0.0018
+    },
+    {
+      "id": "squash_winter_butternut_raw_2685570",
+      "name": "Squash, winter, butternut, raw",
+      "p": 0.0115,
+      "c": 0.105,
+      "f": 0.0017
+    },
+    {
+      "id": "strawberries_raw_2346409",
+      "name": "Strawberries, raw",
+      "p": 0.0064,
+      "c": 0.0796,
+      "f": 0.0022
+    },
+    {
+      "id": "sugars_granulated_746784",
+      "name": "Sugars, granulated",
+      "p": 0.0,
+      "c": 0.996,
+      "f": 0.0032
+    },
+    {
+      "id": "sweet_potatoes_orange_flesh_without_skin_2346404",
+      "name": "Sweet potatoes, orange flesh, without skin, raw",
+      "p": 0.0158,
+      "c": 0.173,
+      "f": 0.0037
+    },
+    {
+      "id": "tomato_juice_with_added_ingredients_from_2003596",
+      "name": "Tomato juice, with added ingredients, from concentrate, shelf stable",
+      "p": 0.0086,
+      "c": 0.0432,
+      "f": 0.0029
+    },
+    {
+      "id": "tomato_paste_canned_without_salt_added_2685580",
+      "name": "Tomato, paste, canned, without salt added",
+      "p": 0.0423,
+      "c": 0.202,
+      "f": 0.0073
+    },
+    {
+      "id": "tomato_puree_canned_2685582",
+      "name": "Tomato, puree, canned",
+      "p": 0.0158,
+      "c": 0.0804,
+      "f": 0.0027
+    },
+    {
+      "id": "tomato_roma_1999634",
+      "name": "Tomato, roma",
+      "p": 0.007,
+      "c": 0.0384,
+      "f": 0.0043
+    },
+    {
+      "id": "tomato_sauce_canned_with_salt_added_2685579",
+      "name": "Tomato, sauce, canned, with salt added",
+      "p": 0.0135,
+      "c": 0.0633,
+      "f": 0.0038
+    },
+    {
+      "id": "tomatoes_canned_red_ripe_diced_333281",
+      "name": "Tomatoes, canned, red, ripe, diced",
+      "p": 0.0084,
+      "c": 0.0332,
+      "f": 0.005
+    },
+    {
+      "id": "tomatoes_crushed_canned_2685581",
+      "name": "Tomatoes, crushed, canned",
+      "p": 0.0144,
+      "c": 0.0714,
+      "f": 0.004
+    },
+    {
+      "id": "tomatoes_grape_raw_321360",
+      "name": "Tomatoes, grape, raw",
+      "p": 0.0083,
+      "c": 0.0551,
+      "f": 0.0063
+    },
+    {
+      "id": "tomatoes_whole_canned_solids_and_liquids_2685578",
+      "name": "Tomatoes, whole, canned, solids and liquids, with salt added",
+      "p": 0.0087,
+      "c": 0.0429,
+      "f": 0.0021
+    },
+    {
+      "id": "turnips_raw_2747674",
+      "name": "Turnips, raw",
+      "p": 0.0095,
+      "c": 0.0727,
+      "f": 0.0012
+    },
+    {
+      "id": "watermelon_seedless_rind_only_raw_2747676",
+      "name": "Watermelon, seedless, rind only, raw",
+      "p": 0.0053,
+      "c": 0.0417,
+      "f": 0.0007
+    },
+    {
+      "id": "wild_rice_dry_raw_2710821",
+      "name": "Wild rice, dry, raw",
+      "p": 0.128,
+      "c": 0.757,
+      "f": 0.017
+    },
+    {
+      "id": "yogurt_greek_strawberry_nonfat_330415",
+      "name": "Yogurt, Greek, strawberry, nonfat",
+      "p": 0.0806,
+      "c": 0.122,
+      "f": 0.0015
+    },
+    {
+      "id": "yogurt_plain_nonfat_2647437",
+      "name": "Yogurt, plain, nonfat",
+      "p": 0.0423,
+      "c": 0.0808,
+      "f": 0.0009
+    }
+  ],
+  "fat": [
+    {
+      "id": "almond_butter_creamy_2262074",
+      "name": "Almond butter, creamy",
+      "p": 0.208,
+      "c": 0.212,
+      "f": 0.53
+    },
+    {
+      "id": "almond_milk_unsweetened_plain_refrigerat_2257045",
+      "name": "Almond milk, unsweetened, plain, refrigerated",
+      "p": 0.0066,
+      "c": 0.0067,
+      "f": 0.0156
+    },
+    {
+      "id": "almond_milk_unsweetened_plain_shelf_stab_1999631",
+      "name": "Almond milk, unsweetened, plain, shelf stable",
+      "p": 0.0056,
+      "c": 0.0034,
+      "f": 0.0122
+    },
+    {
+      "id": "avocado_hass_peeled_raw_2710824",
+      "name": "Avocado, Hass, peeled, raw",
+      "p": 0.0181,
+      "c": 0.0832,
+      "f": 0.203
+    },
+    {
+      "id": "beef_chuck_roast_boneless_choice_raw_2646174",
+      "name": "Beef, chuck, roast, boneless, choice, raw",
+      "p": 0.184,
+      "c": 0.0,
+      "f": 0.178
+    },
+    {
+      "id": "beef_flank_steak_boneless_choice_raw_2646175",
+      "name": "Beef, flank, steak, boneless, choice, raw",
+      "p": 0.201,
+      "c": 0.0,
+      "f": 0.094
+    },
+    {
+      "id": "beef_ground_80_lean_meat_20_fat_raw_2514744",
+      "name": "Beef, ground, 80% lean meat / 20% fat, raw",
+      "p": 0.175,
+      "c": 0.0,
+      "f": 0.194
+    },
+    {
+      "id": "beef_ground_90_lean_meat_10_fat_raw_2514743",
+      "name": "Beef, ground, 90% lean meat / 10% fat, raw",
+      "p": 0.182,
+      "c": 0.0,
+      "f": 0.128
+    },
+    {
+      "id": "beef_ribeye_steak_boneless_choice_raw_2646172",
+      "name": "Beef, ribeye, steak, boneless, choice, raw",
+      "p": 0.187,
+      "c": 0.0,
+      "f": 0.2
+    },
+    {
+      "id": "beef_short_loin_ny_strip_steak_raw_2727572",
+      "name": "Beef, short loin (NY strip steak), raw",
+      "p": 0.213,
+      "c": 0.0022,
+      "f": 0.115
+    },
+    {
+      "id": "bison_ground_raw_2727571",
+      "name": "Bison, ground, raw",
+      "p": 0.199,
+      "c": -0.0015,
+      "f": 0.0888
+    },
+    {
+      "id": "cheese_american_restaurant_747429",
+      "name": "Cheese, American, restaurant",
+      "p": 0.175,
+      "c": 0.0635,
+      "f": 0.311
+    },
+    {
+      "id": "cheese_cheddar_328637",
+      "name": "Cheese, cheddar",
+      "p": 0.233,
+      "c": 0.0244,
+      "f": 0.34
+    },
+    {
+      "id": "cheese_cotija_solid_2647443",
+      "name": "Cheese, cotija, solid",
+      "p": 0.238,
+      "c": 0.0272,
+      "f": 0.272
+    },
+    {
+      "id": "cheese_dry_white_queso_seco_746765",
+      "name": "Cheese, dry white, queso seco",
+      "p": 0.245,
+      "c": 0.0207,
+      "f": 0.243
+    },
+    {
+      "id": "cheese_feta_whole_milk_crumbled_2259796",
+      "name": "Cheese, feta, whole milk, crumbled",
+      "p": 0.197,
+      "c": 0.0558,
+      "f": 0.191
+    },
+    {
+      "id": "cheese_monterey_jack_solid_2647438",
+      "name": "Cheese, monterey jack, solid",
+      "p": 0.226,
+      "c": 0.019,
+      "f": 0.326
+    },
+    {
+      "id": "cheese_mozzarella_low_moisture_part_skim_329370",
+      "name": "Cheese, mozzarella, low moisture, part-skim",
+      "p": 0.237,
+      "c": 0.0444,
+      "f": 0.204
+    },
+    {
+      "id": "cheese_oaxaca_solid_2647441",
+      "name": "Cheese, oaxaca, solid",
+      "p": 0.221,
+      "c": 0.024,
+      "f": 0.221
+    },
+    {
+      "id": "cheese_parmesan_grated_325036",
+      "name": "Cheese, parmesan, grated",
+      "p": 0.296,
+      "c": 0.124,
+      "f": 0.28
+    },
+    {
+      "id": "cheese_parmesan_grated_refrigerated_2259795",
+      "name": "Cheese, parmesan, grated, refrigerated",
+      "p": 0.301,
+      "c": 0.0433,
+      "f": 0.295
+    },
+    {
+      "id": "cheese_pasteurized_process_cheese_food_o_2647439",
+      "name": "Cheese, pasteurized process cheese food or product, American, singles",
+      "p": 0.156,
+      "c": 0.0819,
+      "f": 0.239
+    },
+    {
+      "id": "cheese_pasteurized_process_american_vita_325198",
+      "name": "Cheese, pasteurized process, American, vitamin D fortified",
+      "p": 0.18,
+      "c": 0.0527,
+      "f": 0.306
+    },
+    {
+      "id": "cheese_provolone_sliced_2647440",
+      "name": "Cheese, provolone, sliced",
+      "p": 0.235,
+      "c": 0.0245,
+      "f": 0.281
+    },
+    {
+      "id": "cheese_queso_fresco_solid_2647442",
+      "name": "Cheese, queso fresco, solid",
+      "p": 0.189,
+      "c": 0.0296,
+      "f": 0.234
+    },
+    {
+      "id": "cheese_ricotta_whole_milk_746766",
+      "name": "Cheese, ricotta, whole milk",
+      "p": 0.0781,
+      "c": 0.0686,
+      "f": 0.11
+    },
+    {
+      "id": "cheese_swiss_746767",
+      "name": "Cheese, swiss",
+      "p": 0.27,
+      "c": 0.0144,
+      "f": 0.31
+    },
+    {
+      "id": "chia_seeds_dry_raw_2710819",
+      "name": "Chia seeds, dry, raw",
+      "p": 0.17,
+      "c": 0.383,
+      "f": 0.329
+    },
+    {
+      "id": "chicken_thigh_meat_and_skin_raw_2727567",
+      "name": "Chicken, thigh, meat and skin, raw",
+      "p": 0.171,
+      "c": -0.0017,
+      "f": 0.134
+    },
+    {
+      "id": "chicken_wing_meat_and_skin_raw_2727568",
+      "name": "Chicken, wing, meat and skin, raw",
+      "p": 0.184,
+      "c": -0.0046,
+      "f": 0.106
+    },
+    {
+      "id": "cream_cheese_full_fat_block_2346385",
+      "name": "Cream cheese, full fat, block",
+      "p": 0.0579,
+      "c": 0.0456,
+      "f": 0.335
+    },
+    {
+      "id": "cream_heavy_2346386",
+      "name": "Cream, heavy",
+      "p": 0.0202,
+      "c": 0.038,
+      "f": 0.356
+    },
+    {
+      "id": "cream_sour_full_fat_2346387",
+      "name": "Cream, sour, full fat",
+      "p": 0.0307,
+      "c": 0.0556,
+      "f": 0.18
+    },
+    {
+      "id": "egg_whole_dried_329490",
+      "name": "Egg, whole, dried",
+      "p": 0.481,
+      "c": 0.0187,
+      "f": 0.398
+    },
+    {
+      "id": "egg_whole_raw_frozen_pasteurized_323604",
+      "name": "Egg, whole, raw, frozen, pasteurized",
+      "p": 0.123,
+      "c": 0.0091,
+      "f": 0.103
+    },
+    {
+      "id": "egg_yolk_dried_329716",
+      "name": "Egg, yolk, dried",
+      "p": 0.342,
+      "c": 0.0107,
+      "f": 0.555
+    },
+    {
+      "id": "egg_yolk_raw_frozen_pasteurized_329596",
+      "name": "Egg, yolk, raw, frozen, pasteurized",
+      "p": 0.156,
+      "c": 0.0059,
+      "f": 0.251
+    },
+    {
+      "id": "eggs_grade_a_large_egg_whole_748967",
+      "name": "Eggs, Grade A, Large, egg whole",
+      "p": 0.124,
+      "c": 0.0096,
+      "f": 0.0996
+    },
+    {
+      "id": "eggs_grade_a_large_egg_yolk_748236",
+      "name": "Eggs, Grade A, Large, egg yolk",
+      "p": 0.162,
+      "c": 0.0102,
+      "f": 0.288
+    },
+    {
+      "id": "fish_salmon_atlantic_farm_raised_raw_2684441",
+      "name": "Fish, salmon, Atlantic, farm raised, raw",
+      "p": 0.203,
+      "c": 0.0,
+      "f": 0.131
+    },
+    {
+      "id": "flaxseed_ground_2262075",
+      "name": "Flaxseed, ground",
+      "p": 0.18,
+      "c": 0.344,
+      "f": 0.373
+    },
+    {
+      "id": "flour_almond_2261420",
+      "name": "Flour, almond",
+      "p": 0.262,
+      "c": 0.162,
+      "f": 0.502
+    },
+    {
+      "id": "flour_soy_full_fat_1104766",
+      "name": "Flour, soy, full-fat",
+      "p": 0.386,
+      "c": 0.279,
+      "f": 0.207
+    },
+    {
+      "id": "frankfurter_beef_unheated_323121",
+      "name": "Frankfurter, beef, unheated",
+      "p": 0.117,
+      "c": 0.0289,
+      "f": 0.28
+    },
+    {
+      "id": "hummus_commercial_321358",
+      "name": "Hummus, commercial",
+      "p": 0.0735,
+      "c": 0.149,
+      "f": 0.171
+    },
+    {
+      "id": "lamb_ground_raw_2727570",
+      "name": "Lamb, ground, raw",
+      "p": 0.175,
+      "c": -0.0025,
+      "f": 0.186
+    },
+    {
+      "id": "milk_whole_3_25_milkfat_with_added_vitam_746782",
+      "name": "Milk, whole, 3.25% milkfat, with added vitamin D",
+      "p": 0.0327,
+      "c": 0.0463,
+      "f": 0.032
+    },
+    {
+      "id": "mustard_prepared_yellow_326698",
+      "name": "Mustard, prepared, yellow",
+      "p": 0.0425,
+      "c": 0.053,
+      "f": 0.0338
+    },
+    {
+      "id": "nuts_almonds_dry_roasted_with_salt_added_323294",
+      "name": "Nuts, almonds, dry roasted, with salt added",
+      "p": 0.204,
+      "c": 0.162,
+      "f": 0.578
+    },
+    {
+      "id": "nuts_almonds_whole_raw_2346393",
+      "name": "Nuts, almonds, whole, raw",
+      "p": 0.215,
+      "c": 0.2,
+      "f": 0.511
+    },
+    {
+      "id": "nuts_brazilnuts_raw_2515373",
+      "name": "Nuts, brazilnuts, raw",
+      "p": 0.15,
+      "c": 0.216,
+      "f": 0.574
+    },
+    {
+      "id": "nuts_cashew_nuts_raw_2515374",
+      "name": "Nuts, cashew nuts, raw",
+      "p": 0.174,
+      "c": 0.363,
+      "f": 0.389
+    },
+    {
+      "id": "nuts_hazelnuts_or_filberts_raw_2515375",
+      "name": "Nuts, hazelnuts or filberts, raw",
+      "p": 0.135,
+      "c": 0.265,
+      "f": 0.535
+    },
+    {
+      "id": "nuts_macadamia_nuts_raw_2515378",
+      "name": "Nuts, macadamia nuts, raw",
+      "p": 0.0779,
+      "c": 0.241,
+      "f": 0.649
+    },
+    {
+      "id": "nuts_pecans_halves_raw_2346395",
+      "name": "Nuts, pecans, halves, raw",
+      "p": 0.0996,
+      "c": 0.127,
+      "f": 0.733
+    },
+    {
+      "id": "nuts_pine_nuts_raw_2346392",
+      "name": "Nuts, pine nuts, raw",
+      "p": 0.157,
+      "c": 0.186,
+      "f": 0.613
+    },
+    {
+      "id": "nuts_pistachio_nuts_raw_2515379",
+      "name": "Nuts, pistachio nuts, raw",
+      "p": 0.205,
+      "c": 0.277,
+      "f": 0.45
+    },
+    {
+      "id": "nuts_walnuts_english_halves_raw_2346394",
+      "name": "Nuts, walnuts, English, halves, raw",
+      "p": 0.146,
+      "c": 0.109,
+      "f": 0.697
+    },
+    {
+      "id": "oat_milk_unsweetened_plain_refrigerated_2257046",
+      "name": "Oat milk, unsweetened, plain, refrigerated",
+      "p": 0.008,
+      "c": 0.051,
+      "f": 0.0275
+    },
+    {
+      "id": "oil_coconut_330458",
+      "name": "Oil, coconut",
+      "p": 0.0,
+      "c": 0.0084,
+      "f": 0.991
+    },
+    {
+      "id": "olives_green_manzanilla_stuffed_with_pim_332791",
+      "name": "Olives, green, Manzanilla, stuffed with pimiento",
+      "p": 0.0115,
+      "c": 0.0496,
+      "f": 0.129
+    },
+    {
+      "id": "peanut_butter_creamy_2262072",
+      "name": "Peanut butter, creamy",
+      "p": 0.24,
+      "c": 0.227,
+      "f": 0.494
+    },
+    {
+      "id": "peanuts_raw_2515376",
+      "name": "Peanuts, raw",
+      "p": 0.232,
+      "c": 0.265,
+      "f": 0.433
+    },
+    {
+      "id": "pork_belly_with_skin_raw_2727576",
+      "name": "Pork, belly, with skin, raw",
+      "p": 0.152,
+      "c": -0.007,
+      "f": 0.358
+    },
+    {
+      "id": "pork_cured_bacon_cooked_restaurant_749420",
+      "name": "Pork, cured, bacon, cooked, restaurant",
+      "p": 0.409,
+      "c": 0.021,
+      "f": 0.365
+    },
+    {
+      "id": "pork_ground_raw_2514745",
+      "name": "Pork, ground, raw",
+      "p": 0.178,
+      "c": 0.0,
+      "f": 0.175
+    },
+    {
+      "id": "pork_loin_boneless_raw_2646168",
+      "name": "Pork, loin, boneless, raw",
+      "p": 0.211,
+      "c": 0.0,
+      "f": 0.0947
+    },
+    {
+      "id": "restaurant_chinese_sweet_and_sour_pork_746774",
+      "name": "Restaurant, Chinese, sweet and sour pork",
+      "p": 0.0888,
+      "c": 0.255,
+      "f": 0.136
+    },
+    {
+      "id": "restaurant_latino_tamale_pork_334628",
+      "name": "Restaurant, Latino, tamale, pork",
+      "p": 0.0738,
+      "c": 0.158,
+      "f": 0.0904
+    },
+    {
+      "id": "sausage_italian_pork_mild_cooked_pan_fri_746780",
+      "name": "Sausage, Italian, pork, mild, cooked, pan-fried",
+      "p": 0.182,
+      "c": 0.0215,
+      "f": 0.262
+    },
+    {
+      "id": "sausage_breakfast_sausage_beef_pre_cooke_746779",
+      "name": "Sausage, breakfast sausage, beef, pre-cooked, unprepared",
+      "p": 0.133,
+      "c": 0.0337,
+      "f": 0.287
+    },
+    {
+      "id": "sausage_pork_chorizo_link_or_ground_cook_746781",
+      "name": "Sausage, pork, chorizo, link or ground, cooked, pan-fried",
+      "p": 0.193,
+      "c": 0.0263,
+      "f": 0.281
+    },
+    {
+      "id": "sausage_turkey_breakfast_links_mild_raw_746783",
+      "name": "Sausage, turkey, breakfast links, mild, raw",
+      "p": 0.167,
+      "c": 0.0093,
+      "f": 0.104
+    },
+    {
+      "id": "sea_bass_chilean_frozen_wild_caught_2747668",
+      "name": "Sea bass, Chilean, frozen, wild caught",
+      "p": 0.149,
+      "c": 0.0014,
+      "f": 0.166
+    },
+    {
+      "id": "seeds_pumpkin_seeds_pepitas_raw_2515380",
+      "name": "Seeds, pumpkin seeds (pepitas), raw",
+      "p": 0.299,
+      "c": 0.187,
+      "f": 0.4
+    },
+    {
+      "id": "seeds_sunflower_seed_kernels_dry_roasted_325524",
+      "name": "Seeds, sunflower seed kernels, dry roasted, with salt added",
+      "p": 0.21,
+      "c": 0.171,
+      "f": 0.561
+    },
+    {
+      "id": "seeds_sunflower_seed_kernel_raw_2515381",
+      "name": "Seeds, sunflower seed, kernel, raw",
+      "p": 0.189,
+      "c": 0.245,
+      "f": 0.484
+    },
+    {
+      "id": "sesame_butter_creamy_2262073",
+      "name": "Sesame butter, creamy",
+      "p": 0.197,
+      "c": 0.142,
+      "f": 0.624
+    },
+    {
+      "id": "soy_milk_sweetened_plain_refrigerated_2257044",
+      "name": "Soy milk, sweetened, plain, refrigerated",
+      "p": 0.0278,
+      "c": 0.03,
+      "f": 0.0196
+    },
+    {
+      "id": "soy_milk_unsweetened_plain_shelf_stable_1999630",
+      "name": "Soy milk, unsweetened, plain, shelf stable",
+      "p": 0.0355,
+      "c": 0.0129,
+      "f": 0.0212
+    },
+    {
+      "id": "turkey_ground_93_lean_7_fat_raw_2514747",
+      "name": "Turkey, ground, 93% lean/ 7% fat, raw",
+      "p": 0.173,
+      "c": 0.0,
+      "f": 0.0959
+    },
+    {
+      "id": "yogurt_greek_plain_whole_milk_2259794",
+      "name": "Yogurt, Greek, plain, whole milk",
+      "p": 0.0878,
+      "c": 0.0475,
+      "f": 0.0439
+    },
+    {
+      "id": "yogurt_plain_whole_milk_2259793",
+      "name": "Yogurt, plain, whole milk",
+      "p": 0.0382,
+      "c": 0.0557,
+      "f": 0.0448
+    }
+  ],
+  "extra": []
+}

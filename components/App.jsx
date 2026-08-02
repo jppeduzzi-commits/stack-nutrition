@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { signInAnonymously, onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { fbLoadUser, fbSaveUser, fbLoadMeals, fbSaveMeal, fbDeleteMeal } from "@/lib/db";
 import { computeDailyTargets } from "@/lib/solver";
 import { FOODS, FOOD_LOOKUP } from "@/lib/foods";
 import DailyTargetsForm from "./DailyTargetsForm";
@@ -15,19 +18,57 @@ const DEFAULT_INPUTS = {
   fatPct: 30,
 };
 
+const DEFAULT_TARGETS = computeDailyTargets({
+  calories: DEFAULT_INPUTS.calories,
+  lbm: DEFAULT_INPUTS.lbm,
+  proteinRatioPerLbLbm: DEFAULT_INPUTS.proteinRatio,
+  fatPctOfCalories: DEFAULT_INPUTS.fatPct,
+});
+
+const DEFAULT_DAY_RANGE = { start: "06:00", end: "22:00" };
+
 export default function App() {
+  const [uid, setUid] = useState(null);
+  const [loaded, setLoaded] = useState(false);
   const [inputs, setInputs] = useState(DEFAULT_INPUTS);
-  const [targets, setTargets] = useState(() =>
-    computeDailyTargets({
-      calories: DEFAULT_INPUTS.calories,
-      lbm: DEFAULT_INPUTS.lbm,
-      proteinRatioPerLbLbm: DEFAULT_INPUTS.proteinRatio,
-      fatPctOfCalories: DEFAULT_INPUTS.fatPct,
-    })
-  );
-  const [dayRange, setDayRange] = useState({ start: "06:00", end: "22:00" });
+  const [targets, setTargets] = useState(DEFAULT_TARGETS);
+  const [dayRange, setDayRange] = useState(DEFAULT_DAY_RANGE);
   const [meals, setMeals] = useState([]);
   const [selectedMealId, setSelectedMealId] = useState(null);
+  const saveTimer = useRef(null);
+
+  // Sign in anonymously and load any previously saved state for this device.
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) setUid(user.uid);
+      else signInAnonymously(auth).catch((e) => console.error(e));
+    });
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    if (!uid) return;
+    (async () => {
+      const [userDoc, savedMeals] = await Promise.all([fbLoadUser(uid), fbLoadMeals(uid)]);
+      if (userDoc) {
+        if (userDoc.inputs) setInputs(userDoc.inputs);
+        if (userDoc.targets) setTargets(userDoc.targets);
+        if (userDoc.dayRange) setDayRange(userDoc.dayRange);
+      }
+      if (savedMeals?.length) setMeals(savedMeals);
+      setLoaded(true);
+    })();
+  }, [uid]);
+
+  // Debounced save of daily targets/inputs -- avoid a Firestore write per keystroke.
+  useEffect(() => {
+    if (!uid || !loaded) return;
+    clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      fbSaveUser(uid, { inputs, targets, dayRange });
+    }, 500);
+    return () => clearTimeout(saveTimer.current);
+  }, [uid, loaded, inputs, targets, dayRange]);
 
   const recalcTargets = (newInputs) => {
     setInputs(newInputs);
@@ -43,18 +84,28 @@ export default function App() {
 
   const addMeal = () => {
     const id = `meal_${Date.now()}`;
-    setMeals((m) => [
-      ...m,
-      { id, name: "New meal", time: "12:00", pctOfDay: 0, proteinFood: "", carbFood: "", fatFood: "", extras: [] },
-    ]);
+    const meal = { id, name: "New meal", time: "12:00", pctOfDay: 0, proteinFood: "", carbFood: "", fatFood: "", extras: [] };
+    setMeals((m) => [...m, meal]);
     setSelectedMealId(id);
+    if (uid) fbSaveMeal(uid, meal);
   };
 
-  const updateMeal = (id, patch) => setMeals((m) => m.map((x) => (x.id === id ? { ...x, ...patch } : x)));
+  const updateMeal = (id, patch) => {
+    let updated = null;
+    setMeals((m) =>
+      m.map((x) => {
+        if (x.id !== id) return x;
+        updated = { ...x, ...patch };
+        return updated;
+      })
+    );
+    if (uid && updated) fbSaveMeal(uid, updated);
+  };
 
   const removeMeal = (id) => {
     setMeals((m) => m.filter((x) => x.id !== id));
     setSelectedMealId((sel) => (sel === id ? null : sel));
+    if (uid) fbDeleteMeal(uid, id);
   };
 
   const selectedMeal = meals.find((m) => m.id === selectedMealId) || null;

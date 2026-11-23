@@ -7,7 +7,7 @@ const inputStyle = {
   border: "1.5px solid #e8e8e8",
   borderRadius: 10,
   padding: "10px 12px",
-  fontSize: 14,
+  fontSize: 16,
   fontWeight: 700,
   color: "#0a0a0a",
   outline: "none",
@@ -25,7 +25,7 @@ const DEBOUNCE_MS = 250;
 // extra. Picking a remote result hands back the *whole* food object
 // (name/p/c/f/servingSizeG) rather than an id, since branded foods aren't
 // in the local foodLookup table the solver otherwise relies on.
-export default function ExtraFoodSearch({ localList, value, onChange, placeholder }) {
+export default function ExtraFoodSearch({ localList, value, onChange, onClear, placeholder }) {
   const selectedLocal = localList.find((f) => f.id === value?.food || f.id === value) || null;
   const [query, setQuery] = useState(selectedLocal ? selectedLocal.name : value?.name || "");
   const [open, setOpen] = useState(false);
@@ -48,7 +48,7 @@ export default function ExtraFoodSearch({ localList, value, onChange, placeholde
     clearTimeout(debounceRef.current);
     const q = query.trim();
     if (q.length < 2) {
-      setRemoteResults([]);
+      reqIdRef.current++; // drop any in-flight results
       return;
     }
     debounceRef.current = setTimeout(async () => {
@@ -70,8 +70,11 @@ export default function ExtraFoodSearch({ localList, value, onChange, placeholde
   const q = query.trim().toLowerCase();
   const localMatches = q ? localList.filter((f) => f.name.toLowerCase().includes(q)).slice(0, MAX_LOCAL) : [];
 
+  const remoteMatches = q.length < 2 ? [] : remoteResults;
+
   const pickLocal = (food) => {
-    onChange({ food: food.id, name: food.name });
+    // Carries its own macros too, so it fully replaces a branded pick's values.
+    onChange({ food: food.id, name: food.name, p: food.p, c: food.c, f: food.f, servingSizeG: null, servingLabel: null });
     setQuery(food.name);
     setOpen(false);
   };
@@ -83,8 +86,8 @@ export default function ExtraFoodSearch({ localList, value, onChange, placeholde
       p: food.p,
       c: food.c,
       f: food.f,
-      servingSizeG: food.servingSizeG,
-      servingLabel: food.servingLabel,
+      servingSizeG: food.servingSizeG ?? null,
+      servingLabel: food.servingLabel ?? null,
     });
     setQuery(food.name);
     setOpen(false);
@@ -99,6 +102,7 @@ export default function ExtraFoodSearch({ localList, value, onChange, placeholde
         onFocus={() => setOpen(true)}
         onChange={(e) => {
           setQuery(e.target.value);
+          onClear?.(); // typed text no longer matches the picked food
           setOpen(true);
         }}
         style={inputStyle}
@@ -120,7 +124,7 @@ export default function ExtraFoodSearch({ localList, value, onChange, placeholde
             boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
           }}
         >
-          {localMatches.length === 0 && remoteResults.length === 0 && (
+          {localMatches.length === 0 && remoteMatches.length === 0 && (
             <div style={{ padding: "10px 12px", fontSize: 13, fontWeight: 600, color: "#bbb" }}>
               {searching ? "Searching…" : q ? "No matches" : "Type to search"}
             </div>
@@ -139,12 +143,12 @@ export default function ExtraFoodSearch({ localList, value, onChange, placeholde
             </>
           )}
 
-          {remoteResults.length > 0 && (
+          {remoteMatches.length > 0 && (
             <>
               <div style={{ padding: "7px 12px 4px", fontSize: 10, fontWeight: 800, color: "#bbb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                 Branded &amp; packaged
               </div>
-              {remoteResults.map((f) => (
+              {remoteMatches.map((f) => (
                 <div key={f.id} onMouseDown={() => pickRemote(f)} style={resultRowStyle}>
                   <div>{f.name}</div>
                   {f.servingLabel && (

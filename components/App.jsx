@@ -7,7 +7,7 @@ import { fbLoadUser, fbSaveUser, fbLoadMeals, fbSaveMeal, fbDeleteMeal } from "@
 import { computeDailyTargets } from "@/lib/solver";
 import { FOODS, FOOD_LOOKUP } from "@/lib/foods";
 import DailyTargetsForm from "./DailyTargetsForm";
-import Timeline from "./Timeline";
+import MealsList from "./MealsList";
 import MealBuilder from "./MealBuilder";
 import TabBar from "./TabBar";
 
@@ -26,17 +26,14 @@ const DEFAULT_TARGETS = computeDailyTargets({
   fatPctOfCalories: DEFAULT_INPUTS.fatPct,
 });
 
-const DEFAULT_DAY_RANGE = { start: "06:00", end: "22:00" };
-
 export default function App() {
   const [uid, setUid] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [inputs, setInputs] = useState(DEFAULT_INPUTS);
   const [targets, setTargets] = useState(DEFAULT_TARGETS);
-  const [dayRange, setDayRange] = useState(DEFAULT_DAY_RANGE);
   const [meals, setMeals] = useState([]);
   const [selectedMealId, setSelectedMealId] = useState(null);
-  const [activeTab, setActiveTab] = useState("today");
+  const [activeTab, setActiveTab] = useState("targets");
   const saveTimer = useRef(null);
 
   // Sign in anonymously and load any previously saved state for this device.
@@ -55,7 +52,6 @@ export default function App() {
       if (userDoc) {
         if (userDoc.inputs) setInputs(userDoc.inputs);
         if (userDoc.targets) setTargets(userDoc.targets);
-        if (userDoc.dayRange) setDayRange(userDoc.dayRange);
       }
       if (savedMeals?.length) setMeals(savedMeals);
       setLoaded(true);
@@ -67,10 +63,10 @@ export default function App() {
     if (!uid || !loaded) return;
     clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
-      fbSaveUser(uid, { inputs, targets, dayRange });
+      fbSaveUser(uid, { inputs, targets });
     }, 500);
     return () => clearTimeout(saveTimer.current);
-  }, [uid, loaded, inputs, targets, dayRange]);
+  }, [uid, loaded, inputs, targets]);
 
   const recalcTargets = (newInputs) => {
     setInputs(newInputs);
@@ -84,13 +80,36 @@ export default function App() {
     );
   };
 
-  const addMeal = (time = "12:00") => {
-    const id = `meal_${Date.now()}`;
-    const meal = { id, name: "New meal", time, pctOfDay: 0, proteinFood: "", carbFood: "", fatFood: "", extras: [] };
-    setMeals((m) => [...m, meal]);
-    setSelectedMealId(id);
-    setActiveTab("meal");
-    if (uid) fbSaveMeal(uid, meal);
+  // Standard meal count replaces the old time-of-day schedule: changing it
+  // appends/trims blank meals from the end rather than editing clock times.
+  const setMealCount = (n) => {
+    if (n === meals.length) return;
+    if (n < meals.length) {
+      const removed = meals.slice(n);
+      const next = meals.slice(0, n);
+      setMeals(next);
+      if (selectedMealId && removed.some((m) => m.id === selectedMealId)) {
+        setSelectedMealId(null);
+        setActiveTab("meals");
+      }
+      removed.forEach((m) => {
+        if (uid) fbDeleteMeal(uid, m.id);
+      });
+    } else {
+      const additions = Array.from({ length: n - meals.length }, (_, i) => ({
+        id: `meal_${Date.now()}_${i}`,
+        name: `Meal ${meals.length + i + 1}`,
+        pctOfDay: 0,
+        proteinFood: "",
+        carbFood: "",
+        fatFood: "",
+        extras: [],
+      }));
+      setMeals([...meals, ...additions]);
+      additions.forEach((m) => {
+        if (uid) fbSaveMeal(uid, m);
+      });
+    }
   };
 
   const selectMeal = (id) => {
@@ -110,13 +129,6 @@ export default function App() {
     if (uid && updated) fbSaveMeal(uid, updated);
   };
 
-  const removeMeal = (id) => {
-    setMeals((m) => m.filter((x) => x.id !== id));
-    setSelectedMealId((sel) => (sel === id ? null : sel));
-    setActiveTab((tab) => (selectedMealId === id ? "today" : tab));
-    if (uid) fbDeleteMeal(uid, id);
-  };
-
   const selectedMeal = meals.find((m) => m.id === selectedMealId) || null;
 
   return (
@@ -129,21 +141,28 @@ export default function App() {
         </div>
       </header>
 
+      <TabBar
+        active={activeTab}
+        onChange={setActiveTab}
+        tabs={[
+          { key: "targets", label: "Targets" },
+          { key: "meals", label: "Meals" },
+          { key: "meal", label: selectedMeal ? selectedMeal.name : "Meal", disabled: !selectedMeal },
+        ]}
+      />
+
       <main style={{ flex: 1, overflowY: "auto", padding: "16px 20px 24px" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
-          {activeTab === "today" ? (
+          {activeTab === "targets" ? (
+            <DailyTargetsForm inputs={inputs} targets={targets} onRecalc={recalcTargets} onEditTargets={setTargets} />
+          ) : activeTab === "meals" ? (
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <DailyTargetsForm inputs={inputs} targets={targets} onRecalc={recalcTargets} onEditTargets={setTargets} />
-
-              <Timeline
+              <MealsList
                 meals={meals}
-                dayRange={dayRange}
-                onRangeChange={setDayRange}
+                onMealCountChange={setMealCount}
                 selectedMealId={selectedMealId}
-                onAdd={addMeal}
                 onSelect={selectMeal}
                 onUpdate={updateMeal}
-                onRemove={removeMeal}
               />
 
               <div style={{ fontSize: 11, fontWeight: 600, color: "#bbb", marginTop: 16, textAlign: "center" }}>
@@ -161,20 +180,11 @@ export default function App() {
           ) : (
             <div style={{ textAlign: "center", padding: "80px 20px", color: "#bbb" }}>
               <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>No meal selected</div>
-              <div style={{ fontSize: 13 }}>Add or tap a meal on the Today tab to build it here.</div>
+              <div style={{ fontSize: 13 }}>Pick how many meals you want on the Meals tab, then tap one to build it here.</div>
             </div>
           )}
         </div>
       </main>
-
-      <TabBar
-        active={activeTab}
-        onChange={setActiveTab}
-        tabs={[
-          { key: "today", label: "Today" },
-          { key: "meal", label: selectedMeal ? selectedMeal.name : "Meal", disabled: !selectedMeal },
-        ]}
-      />
     </div>
   );
 }

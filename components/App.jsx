@@ -5,7 +5,7 @@ import { signInAnonymously, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import {
   fbPersonExists, fbOpenPerson, fbLoadPerson, fbSavePerson, fbLoadMeals, fbSaveMeal, fbDeleteMeal,
-  fbLoadRecentDays, fbLoadDay, fbSaveEntry, fbDeleteEntry,
+  fbLoadRecentDays, fbLoadDay, fbSaveEntry, fbDeleteEntry, fbDeletePerson,
 } from "@/lib/db";
 import { loadPerson, rememberPerson } from "@/lib/person";
 import { dateKey } from "@/lib/log";
@@ -15,6 +15,7 @@ import SetupPage from "./SetupPage";
 import MealBuilder from "./MealBuilder";
 import LogPage from "./LogPage";
 import HistoryPage from "./HistoryPage";
+import SettingsPage from "./SettingsPage";
 import NameScreen from "./NameScreen";
 import TabBar from "./TabBar";
 
@@ -217,6 +218,11 @@ export default function App() {
     rememberPerson(null);
     window.location.reload();
   };
+  const deletePerson = async () => {
+    clearTimeout(saveTimer.current); // a pending save would recreate the account
+    await fbDeletePerson(personId, uid);
+    switchPerson();
+  };
 
   const recalcTargets = (newInputs) => {
     setInputs(newInputs);
@@ -304,10 +310,16 @@ export default function App() {
   return (
     <div style={{ height: "100dvh", display: "flex", flexDirection: "column", background: "#f5f5f5" }}>
       <header style={{ flexShrink: 0, padding: "20px 20px 4px" }}>
-        <div style={{ maxWidth: 720, margin: "0 auto" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ fontSize: 26, fontWeight: 900, color: "#0a0a0a", letterSpacing: "-0.03em", lineHeight: 1 }}>
             STACK NUTRITION
           </div>
+          <button
+            onClick={() => setActiveTab("settings")}
+            style={{ background: "none", border: "none", padding: "8px 0 8px 12px", fontSize: 12, fontWeight: 800, color: activeTab === "settings" ? "#0a0a0a" : "#888", cursor: "pointer" }}
+          >
+            Settings
+          </button>
         </div>
       </header>
 
@@ -355,8 +367,9 @@ export default function App() {
                 setActiveTab("log");
               }}
             />
+          ) : activeTab === "settings" ? (
+            <SettingsPage person={person} onSwitch={switchPerson} onDelete={deletePerson} />
           ) : activeTab === "setup" ? (
-            <>
             <SetupPage
               inputs={inputs}
               targets={targets}
@@ -372,13 +385,6 @@ export default function App() {
               carbTiming={carbTiming}
               onCarbTimingChange={setCarbTiming}
             />
-            <div style={{ textAlign: "center", fontSize: 12, fontWeight: 600, color: "#888", marginTop: 16 }}>
-              Logging as {person.firstName} {person.lastName} ·{" "}
-              <button onClick={switchPerson} style={{ background: "none", border: "none", fontSize: 12, fontWeight: 800, color: "#0a0a0a", cursor: "pointer" }}>
-                Switch person
-              </button>
-            </div>
-            </>
           ) : selectedMeal ? (
             <>
               <MealBuilder

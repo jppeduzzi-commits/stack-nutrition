@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# USDA raw bulk download (multi-GB) and the built food database -- too big
+# for a normal git push (foods.sqlite alone exceeds GitHub's 100MB limit).
+# foods.sqlite is fetched from Vercel Blob at build time instead (see
+# scripts/fetch-food-db.mjs) and regenerated locally via
+# scripts/build_food_db.py when the source data needs refreshing.
+/data-raw/
+/data/foods.sqlite

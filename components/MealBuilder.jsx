@@ -5,6 +5,7 @@ import { solveMeal } from "@/lib/solver";
 import { MACRO_COLORS } from "@/lib/constants";
 import MacroBadge from "./MacroBadge";
 import FoodSearch from "./FoodSearch";
+import ExtraFoodSearch from "./ExtraFoodSearch";
 
 const card = {
   background: "#fff",
@@ -122,11 +123,19 @@ export default function MealBuilder({ meal, dailyTargets, foods, foodLookup, onU
       {(meal.extras || []).map((ex, idx) => (
         <div key={idx} style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "center" }}>
           <div style={{ flex: 1 }}>
-            <FoodSearch
-              list={allFoods}
-              value={ex.food}
-              onChange={(id) => updateExtra(idx, { food: id })}
-              placeholder="Search foods…"
+            <ExtraFoodSearch
+              localList={allFoods}
+              value={ex}
+              onChange={(picked) =>
+                updateExtra(idx, {
+                  ...picked,
+                  // Default-fill a branded pick's grams to its labeled
+                  // serving size -- that's how a packaged food is actually
+                  // measured, no reason to make someone type it in.
+                  grams: ex.grams ? ex.grams : picked.servingSizeG || ex.grams,
+                })
+              }
+              placeholder="Search foods, including branded…"
             />
           </div>
           <input

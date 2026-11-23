@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { MAX_MEALS, MEAL_NAMES, pctSum } from "@/lib/meals";
 import MacroBadge from "./MacroBadge";
 
 const card = {
@@ -22,15 +23,13 @@ const inputStyle = {
   border: "1.5px solid #e8e8e8",
   borderRadius: 8,
   padding: "6px 8px",
-  fontSize: 13,
+  fontSize: 16, // below 16 iOS zooms the page on focus
   fontWeight: 700,
   color: "#0a0a0a",
   outline: "none",
   background: "#fff",
 };
 
-const MIN_MEALS = 1;
-const MAX_MEALS = 8;
 
 const CARB_TIMING_OPTIONS = [
   { key: "even", label: "Even split" },
@@ -41,16 +40,19 @@ const CARB_TIMING_OPTIONS = [
 // dense page -- daily macro targets, meal count, each meal's % of day, and
 // carb/fat timing -- so there's no horizontal overflow or pinch-zooming to
 // find a control. Food logging itself lives on the other tab.
-export default function SetupPage({
+export default function StrategyPage({
   inputs,
   targets,
   onRecalc,
   onEditTargets,
   meals,
-  onMealCountChange,
-  selectedMealId,
+  onAddMeal,
+  onRemoveLastMeal,
   onSelect,
-  onUpdate,
+  onMealPatch,
+  onSetPct,
+  onToggleLock,
+  onSortMeals,
   trainingTime,
   onTrainingTimeChange,
   carbTiming,
@@ -73,7 +75,7 @@ export default function SetupPage({
   };
 
   const fmt = (n) => (Number.isFinite(n) ? Math.round(n * 10) / 10 : "—");
-  const pctTotal = meals.reduce((s, m) => s + (Number(m.pctOfDay) || 0), 0);
+  const pctTotal = pctSum(meals);
   const pctOk = Math.abs(pctTotal - 100) < 0.05;
 
   return (
@@ -140,7 +142,7 @@ export default function SetupPage({
       <section style={card}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
           <div style={sectionLabel}>Meals per day</div>
-          <Stepper value={meals.length} min={MIN_MEALS} max={MAX_MEALS} onChange={onMealCountChange} />
+          <Stepper value={meals.length} min={1} max={MAX_MEALS} onChange={(n) => (n > meals.length ? onAddMeal() : onRemoveLastMeal())} />
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
@@ -148,16 +150,19 @@ export default function SetupPage({
             <MealRow
               key={m.id}
               meal={m}
-              selected={m.id === selectedMealId}
+              taken={meals.filter((x) => x.id !== m.id).map((x) => x.name)}
               onSelect={() => onSelect(m.id)}
-              onUpdate={(patch) => onUpdate(m.id, patch)}
+              onPatch={(patch) => onMealPatch(m.id, patch)}
+              onSetPct={(v) => onSetPct(m.id, v)}
+              onToggleLock={() => onToggleLock(m.id)}
+              onSort={onSortMeals}
             />
           ))}
         </div>
 
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 6 }}>
           <div style={{ fontSize: 11, fontWeight: 800, color: pctOk ? "#10B981" : "#E4574C" }}>
-            {fmt(pctTotal)}% of day {pctOk ? "✓" : "(needs 100%)"}
+            {fmt(pctTotal)}% of day {pctOk ? "✓" : "(unlock a meal to reach 100%)"}
           </div>
         </div>
       </section>
@@ -171,7 +176,7 @@ export default function SetupPage({
               type="time"
               value={trainingTime}
               onChange={(e) => onTrainingTimeChange(e.target.value)}
-              style={{ ...inputStyle, width: 104 }}
+              style={{ ...inputStyle, width: 124 }}
             />
           </div>
           <div style={{ display: "flex", gap: 6 }}>
@@ -259,54 +264,50 @@ function stepBtnStyle(disabled) {
   };
 }
 
-function MealRow({ meal, selected, onSelect, onUpdate }) {
+// Time edits save as they're made; the list only re-sorts after leaving the
+// field, so the row doesn't jump while it's being edited.
+function MealRow({ meal, taken, onSelect, onPatch, onSetPct, onToggleLock, onSort }) {
+  const names = MEAL_NAMES.includes(meal.name) ? MEAL_NAMES : [meal.name, ...MEAL_NAMES];
   return (
-    <div
-      onClick={onSelect}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
-        padding: "6px 8px",
-        borderRadius: 9,
-        border: `1.5px solid ${selected ? "#0a0a0a" : "#e8e8e8"}`,
-        background: selected ? "#0a0a0a" : "#fafafa",
-        cursor: "pointer",
-      }}
-    >
-      <input
-        type="text"
-        value={meal.name}
-        onClick={(e) => e.stopPropagation()}
-        onChange={(e) => onUpdate({ name: e.target.value })}
-        style={{
-          ...inputStyle,
-          flex: 1,
-          minWidth: 0,
-          padding: "5px 8px",
-          fontSize: 12,
-          background: selected ? "#1a1a1a" : "#fff",
-          color: selected ? "#fff" : "#0a0a0a",
-          border: `1.5px solid ${selected ? "#333" : "#e8e8e8"}`,
-        }}
-      />
-      <input
-        type="number"
-        value={meal.pctOfDay}
-        onClick={(e) => e.stopPropagation()}
-        onChange={(e) => onUpdate({ pctOfDay: e.target.value === "" ? "" : Number(e.target.value) })}
-        style={{
-          ...inputStyle,
-          width: 44,
-          padding: "5px 6px",
-          fontSize: 12,
-          background: selected ? "#1a1a1a" : "#fff",
-          color: selected ? "#fff" : "#0a0a0a",
-          border: `1.5px solid ${selected ? "#333" : "#e8e8e8"}`,
-        }}
-      />
-      <span style={{ fontSize: 10, fontWeight: 700, color: selected ? "#bbb" : "#888" }}>%</span>
-      <span style={{ fontSize: 15, color: selected ? "#fff" : "#ccc", lineHeight: 1 }}>&rsaquo;</span>
+    <div style={{ padding: 8, borderRadius: 10, border: "1.5px solid #e8e8e8", background: "#fafafa" }}>
+      <div style={{ display: "flex", gap: 6 }}>
+        <select value={meal.name} aria-label="Meal name" onChange={(e) => onPatch({ name: e.target.value })} style={{ ...inputStyle, flex: 1, minWidth: 0 }}>
+          {names.map((n) => (
+            <option key={n} value={n} disabled={taken.includes(n)}>{n}</option>
+          ))}
+        </select>
+        <input type="time" value={meal.time} aria-label={`${meal.name} time`} onChange={(e) => e.target.value && onPatch({ time: e.target.value })} onBlur={onSort} style={{ ...inputStyle, width: 124 }} />
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 6 }}>
+        <PctField key={meal.pctOfDay} value={meal.pctOfDay} name={meal.name} onCommit={onSetPct} />
+        <span style={{ fontSize: 12, fontWeight: 700, color: "#888" }}>%</span>
+        <button
+          onClick={onToggleLock}
+          aria-pressed={!!meal.locked}
+          aria-label={`${meal.locked ? "Unlock" : "Lock"} ${meal.name}`}
+          style={{ border: `1.5px solid ${meal.locked ? "#0a0a0a" : "#e8e8e8"}`, background: meal.locked ? "#0a0a0a" : "#fff", color: meal.locked ? "#fff" : "#888", borderRadius: 16, padding: "6px 12px", fontSize: 11, fontWeight: 800, cursor: "pointer" }}
+        >
+          {meal.locked ? "Locked" : "Auto"}
+        </button>
+        <div style={{ flex: 1 }} />
+        <button onClick={onSelect} style={{ border: "1.5px solid #e8e8e8", background: "#fff", color: "#0a0a0a", borderRadius: 16, padding: "6px 12px", fontSize: 11, fontWeight: 800, cursor: "pointer" }}>
+          Foods ›
+        </button>
+      </div>
     </div>
+  );
+}
+
+function PctField({ value, name, onCommit }) {
+  const [v, setV] = useState(String(value));
+  const commit = () => {
+    const n = Math.round(Number(v));
+    if (v.trim() === "" || !Number.isFinite(n) || n === Number(value)) return setV(String(value));
+    onCommit(n);
+    setV(String(value)); // if the change was capped back to the same value
+  };
+  return (
+    <input type="number" inputMode="numeric" min="0" max="100" value={v} aria-label={`${name} percent of day`} onFocus={(e) => e.target.select()}
+      onChange={(e) => setV(e.target.value)} onBlur={commit} onKeyDown={(e) => e.key === "Enter" && e.target.blur()} style={{ ...inputStyle, width: 64 }} />
   );
 }

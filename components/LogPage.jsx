@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { MACRO_COLORS } from "@/lib/constants";
+import { formatTime } from "@/lib/meals";
 import { dayEntries, dayTotals, formatKey, itemsFromMeal, makeItem, newId, shiftKey, sumItems } from "@/lib/log";
 import { solveMeal } from "@/lib/solver";
+import MacroSummary from "./MacroSummary";
 import ExtraFoodSearch from "./ExtraFoodSearch";
 
 const card = { background: "#fff", border: "1.5px solid #e8e8e8", borderRadius: 14, padding: 14 };
@@ -14,20 +15,13 @@ const pill = { border: "1.5px solid #e8e8e8", background: "#fff", borderRadius: 
 const dark = { ...pill, background: "#0a0a0a", borderColor: "#0a0a0a", color: "#fff" };
 const r = Math.round;
 
-const ROWS = [
-  ["protein", "Protein", "p", "proteinG"],
-  ["carb", "Carbs", "c", "carbG"],
-  ["fat", "Fat", "f", "fatG"],
-];
-
 export function macroLine(t) {
   return `${r(t.kcal)} cal · ${r(t.p)}P ${r(t.c)}C ${r(t.f)}F`;
 }
 
-export default function LogPage({ date, today, onDateChange, day, ready, targets, meals, mealTargets, foodLookup, allFoods, saving, onSaveEntry, onDeleteEntry }) {
+export default function LogPage({ date, today, onDateChange, day, ready, targets, meals, mealTargets, foodLookup, allFoods, saving, onSaveEntry, onDeleteEntry, onEditMeal }) {
   const entries = dayEntries(day);
   const totals = dayTotals(day);
-  const left = r(targets.calories) - r(totals.kcal);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -40,32 +34,10 @@ export default function LogPage({ date, today, onDateChange, day, ready, targets
         <button style={{ ...pill, opacity: date >= today ? 0.3 : 1 }} aria-label="Next day" disabled={date >= today} onClick={() => onDateChange(shiftKey(date, 1))}>›</button>
       </div>
 
-      <section style={card}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
-          <div style={{ fontSize: 24, fontWeight: 900 }}>
-            {r(totals.kcal)}<span style={{ fontSize: 13, color: "#888", fontWeight: 700 }}> / {r(targets.calories)} cal</span>
-          </div>
-          {targets.calories > 0 && <div style={{ fontSize: 13, fontWeight: 800 }}>{left >= 0 ? `${left} left` : `${-left} over`}</div>}
-        </div>
-        {ROWS.map(([macro, name, k, tk]) => {
-          const goal = Number(targets[tk]) || 0;
-          const diff = r(goal) - r(totals[k]);
-          return (
-            <div key={macro} style={{ marginTop: 8 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, fontWeight: 700, marginBottom: 3 }}>
-                <span style={{ color: MACRO_COLORS[macro] }}>{name}</span>
-                <span>{r(totals[k])} / {r(goal)}g {goal > 0 && <span style={{ color: "#888" }}>· {diff >= 0 ? `${diff} left` : `${-diff} over`}</span>}</span>
-              </div>
-              <div style={{ height: 6, background: "#f0f0f0", borderRadius: 3, overflow: "hidden" }}>
-                <div style={{ height: "100%", width: `${goal > 0 ? Math.min(100, (totals[k] / goal) * 100) : 0}%`, background: MACRO_COLORS[macro] }} />
-              </div>
-            </div>
-          );
-        })}
-      </section>
+      <MacroSummary totals={totals} targets={targets} />
 
       {!(targets.calories > 0) && (
-        <div style={{ ...card, fontSize: 13, fontWeight: 700, color: "#888" }}>Set your daily targets on the Setup tab to see what you have left.</div>
+        <div style={{ ...card, fontSize: 13, fontWeight: 700, color: "#888" }}>Set your daily targets on the Strategy tab to see what you have left.</div>
       )}
 
       {!ready ? (
@@ -80,11 +52,12 @@ export default function LogPage({ date, today, onDateChange, day, ready, targets
               return (
                 <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "7px 0", borderTop: i ? "1px solid #f0f0f0" : "none" }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 800 }}>{m.name}{logged && <span style={{ color: "#10B981" }}> ✓</span>}</div>
+                    <div style={{ fontSize: 14, fontWeight: 800 }}><span style={{ color: "#888", fontWeight: 700 }}>{formatTime(m.time)}</span> {m.name}{logged && <span style={{ color: "#10B981" }}> ✓</span>}</div>
                     <div style={{ fontSize: 11, fontWeight: 600, color: "#888" }}>
-                      {items ? macroLine(sumItems(items)) : "Not solved yet. Build it from Setup."}
+                      {items ? macroLine(sumItems(items)) : "No foods picked yet, or they can't hit the target."}
                     </div>
                   </div>
+                  <button style={pill} onClick={() => onEditMeal(m.id)}>{items ? "Edit" : "Build"}</button>
                   {items && (
                     <button style={logged ? pill : dark} onClick={() => onSaveEntry({ id: newId("entry"), name: m.name, mealId: m.id, loggedAt: Date.now(), items })}>
                       {logged ? "Log again" : "Log meal"}

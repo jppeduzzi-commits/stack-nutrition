@@ -8,7 +8,7 @@ const button = { width: "100%", border: "1.5px solid #e8e8e8", background: "#fff
 const note = { fontSize: 12, fontWeight: 600, color: "#888", lineHeight: 1.5 };
 
 // onDelete() removes everything and throws if it couldn't.
-export default function SettingsPage({ person, onSwitch, onDelete }) {
+export default function MorePage({ person, onSwitch, onDelete }) {
   const [confirming, setConfirming] = useState(false);
   const [typed, setTyped] = useState("");
   const [deleting, setDeleting] = useState(false);
@@ -40,13 +40,22 @@ export default function SettingsPage({ person, onSwitch, onDelete }) {
       </section>
 
       <section style={card}>
+        <div style={label}>Units</div>
+        {[["Food", "Grams"], ["Body weight", "Pounds"], ["Energy", "Calories"]].map(([k, v]) => (
+          <div key={k} style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", fontSize: 13, fontWeight: 700 }}>
+            <span>{k}</span><span style={{ color: "#888" }}>{v}</span>
+          </div>
+        ))}
+      </section>
+
+      <section style={card}>
         <div style={label}>Delete account</div>
         {!confirming ? (
           <button style={{ ...button, color: "#a4302a" }} onClick={() => setConfirming(true)}>Delete account</button>
         ) : (
           <>
             <div style={{ ...note, color: "#a4302a", marginBottom: 10 }}>
-              This permanently deletes {fullName}&rsquo;s targets, meals and entire food history, on every device. It can&rsquo;t be undone.
+              This permanently deletes {fullName}&rsquo;s targets, meals, weight log and entire food history, on every device. It can&rsquo;t be undone.
             </div>
             <div style={{ ...note, marginBottom: 6 }}>Type <b style={{ color: "#0a0a0a" }}>{fullName}</b> to confirm.</div>
             <input

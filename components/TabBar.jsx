@@ -1,39 +1,17 @@
 "use client";
 
-// Fixed tab bar below the header -- the one piece of chrome that's always
-// visible and never scrolls, regardless of how long any tab's content gets.
+// Bottom navigation, always visible.
 export default function TabBar({ tabs, active, onChange }) {
   return (
-    <nav
-      style={{
-        flexShrink: 0,
-        display: "flex",
-        borderBottom: "1.5px solid #e8e8e8",
-        background: "#fff",
-      }}
-    >
+    <nav style={{ flexShrink: 0, display: "flex", borderTop: "1.5px solid #e8e8e8", background: "#fff", paddingBottom: "env(safe-area-inset-bottom)" }}>
       {tabs.map((tab) => {
-        const isActive = tab.key === active;
+        const on = tab.key === active;
         return (
           <button
             key={tab.key}
-            onClick={() => !tab.disabled && onChange(tab.key)}
-            disabled={tab.disabled}
-            style={{
-              flex: 1,
-              padding: "10px 8px 12px",
-              background: "none",
-              border: "none",
-              borderBottom: isActive ? "2px solid #0a0a0a" : "2px solid transparent",
-              marginBottom: -1.5,
-              fontFamily: "inherit",
-              fontSize: 12,
-              fontWeight: 800,
-              letterSpacing: "0.04em",
-              textTransform: "uppercase",
-              color: tab.disabled ? "#ddd" : isActive ? "#0a0a0a" : "#aaa",
-              cursor: tab.disabled ? "default" : "pointer",
-            }}
+            onClick={() => onChange(tab.key)}
+            aria-current={on ? "page" : undefined}
+            style={{ flex: 1, padding: "15px 4px", background: "none", border: "none", borderTop: `2px solid ${on ? "#0a0a0a" : "transparent"}`, marginTop: -1.5, fontSize: 12, fontWeight: 800, color: on ? "#0a0a0a" : "#aaa", cursor: "pointer" }}
           >
             {tab.label}
           </button>

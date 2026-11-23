@@ -6,16 +6,18 @@ import { auth } from "@/lib/firebase";
 import {
   fbPersonExists, fbOpenPerson, fbLoadPerson, fbSavePerson, fbLoadMeals, fbSaveMeal, fbDeleteMeal,
   fbLoadRecentDays, fbLoadDay, fbSaveEntry, fbDeleteEntry, fbDeletePerson,
+  fbLoadWeights, fbSaveWeight, fbDeleteWeight,
 } from "@/lib/db";
 import { loadPerson, rememberPerson } from "@/lib/person";
 import { dateKey } from "@/lib/log";
-import { computeDailyTargets, computeMealTargets, estimateMealHour, formatHour } from "@/lib/solver";
+import { addMeal, defaultMeals, formatTime, hasFoods, removeMeal, setPct, sortMeals, toggleLock, upgradeMeals } from "@/lib/meals";
+import { computeDailyTargets, computeMealTargets } from "@/lib/solver";
 import { FOODS, FOOD_LOOKUP } from "@/lib/foods";
-import SetupPage from "./SetupPage";
+import DashboardPage from "./DashboardPage";
+import StrategyPage from "./StrategyPage";
 import MealBuilder from "./MealBuilder";
 import LogPage from "./LogPage";
-import HistoryPage from "./HistoryPage";
-import SettingsPage from "./SettingsPage";
+import MorePage from "./MorePage";
 import NameScreen from "./NameScreen";
 import TabBar from "./TabBar";
 
@@ -27,28 +29,6 @@ const ALL_FOODS = Object.values(FOODS).flat();
 
 const DEFAULT_TRAINING_TIME = "18:00";
 const DEFAULT_CARB_TIMING = "even";
-const DEFAULT_MEAL_COUNT = 3;
-
-// Splits 100% across n meals as whole numbers that sum to exactly 100
-// (any remainder goes to the first meals) rather than a repeating decimal.
-function evenPctSplit(n) {
-  const base = Math.floor(100 / n);
-  const remainder = 100 - base * n;
-  return Array.from({ length: n }, (_, i) => base + (i < remainder ? 1 : 0));
-}
-
-function makeDefaultMeals() {
-  const pcts = evenPctSplit(DEFAULT_MEAL_COUNT);
-  return pcts.map((pctOfDay, i) => ({
-    id: `meal_${Date.now()}_${i}`,
-    name: `Meal ${i + 1}`,
-    pctOfDay,
-    proteinFood: "",
-    carbFood: "",
-    fatFood: "",
-    extras: [],
-  }));
-}
 
 export default function App() {
   const [uid, setUid] = useState(null);
@@ -65,10 +45,12 @@ export default function App() {
   const [carbTiming, setCarbTiming] = useState(DEFAULT_CARB_TIMING);
   const [meals, setMeals] = useState([]);
   const [days, setDays] = useState({}); // date → day doc, or null if nothing logged
+  const [weights, setWeights] = useState({}); // date → pounds
   const [today, setToday] = useState(() => dateKey());
   const [date, setDate] = useState(() => dateKey());
   const [selectedMealId, setSelectedMealId] = useState(null);
-  const [activeTab, setActiveTab] = useState("log");
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const [mealFrom, setMealFrom] = useState("strategy"); // tab the meal builder returns to
   const saveTimer = useRef(null);
   const personId = person?.id;
 
@@ -96,18 +78,21 @@ export default function App() {
     let stale = false;
     (async () => {
       try {
-        const [doc, savedMeals, recent] = await Promise.all([fbLoadPerson(personId), fbLoadMeals(personId), fbLoadRecentDays(personId)]);
+        const [doc, savedMeals, recent, savedWeights] = await Promise.all([
+          fbLoadPerson(personId), fbLoadMeals(personId), fbLoadRecentDays(personId), fbLoadWeights(personId),
+        ]);
         if (stale) return;
         if (doc?.inputs) setInputs(doc.inputs);
         if (doc?.targets) setTargets(doc.targets);
         if (doc?.trainingTime) setTrainingTime(doc.trainingTime);
         if (doc?.carbTiming) setCarbTiming(doc.carbTiming);
+        setWeights(savedWeights);
         setDays(Object.fromEntries(recent.map((d) => [d.date, d])));
         if (savedMeals.length) {
-          setMeals(savedMeals);
+          setMeals(upgradeMeals(savedMeals));
         } else {
           // Nothing saved yet -- seed a starting point rather than "0 meals".
-          const defaults = makeDefaultMeals();
+          const defaults = defaultMeals();
           setMeals(defaults);
           await Promise.all(defaults.map((m) => fbSaveMeal(personId, m)));
         }
@@ -208,6 +193,24 @@ export default function App() {
     if (!(await save(fbDeleteEntry(personId, date, id)))) setEntry(date, id, before);
   };
 
+  const putWeight = (d, lb) =>
+    setWeights((prev) => {
+      const next = { ...prev };
+      if (lb) next[d] = lb;
+      else delete next[d];
+      return next;
+    });
+  const saveWeight = async (d, lb) => {
+    const before = weights[d];
+    putWeight(d, lb);
+    if (!(await save(fbSaveWeight(personId, d, lb)))) putWeight(d, before);
+  };
+  const deleteWeight = async (d) => {
+    const before = weights[d];
+    putWeight(d, null);
+    if (!(await save(fbDeleteWeight(personId, d)))) putWeight(d, before);
+  };
+
   const openPerson = async (p) => {
     await fbOpenPerson(p, uid);
     rememberPerson(p);
@@ -236,57 +239,35 @@ export default function App() {
     );
   };
 
-  // Standard meal count replaces the old time-of-day schedule: changing it
-  // appends/trims blank meals from the end rather than editing clock times.
-  const setMealCount = (n) => {
-    if (n === meals.length) return;
-    if (n < meals.length) {
-      const removed = meals.slice(n);
-      const next = meals.slice(0, n);
-      setMeals(next);
-      if (selectedMealId && removed.some((m) => m.id === selectedMealId)) {
-        setSelectedMealId(null);
-        setActiveTab("setup");
-      }
-      removed.forEach((m) => {
-        save(fbDeleteMeal(personId, m.id));
-      });
-    } else {
-      const additions = Array.from({ length: n - meals.length }, (_, i) => ({
-        id: `meal_${Date.now()}_${i}`,
-        name: `Meal ${meals.length + i + 1}`,
-        pctOfDay: 0,
-        proteinFood: "",
-        carbFood: "",
-        fatFood: "",
-        extras: [],
-      }));
-      setMeals([...meals, ...additions]);
-      additions.forEach((m) => {
-        save(fbSaveMeal(personId, m));
-      });
-    }
+  // Shows the new meal list and saves whatever changed -- one edit can shift
+  // several meals' shares.
+  const applyMeals = (next) => {
+    const changed = next.filter((m) => JSON.stringify(m) !== JSON.stringify(meals.find((x) => x.id === m.id)));
+    const gone = meals.filter((m) => !next.some((x) => x.id === m.id));
+    setMeals(next);
+    const writes = [...changed.map((m) => fbSaveMeal(personId, m)), ...gone.map((m) => fbDeleteMeal(personId, m.id))];
+    if (writes.length) save(Promise.all(writes));
   };
-
-  const selectMeal = (id) => {
+  const updateMeal = (id, patch) => applyMeals(meals.map((m) => (m.id === id ? { ...m, ...patch } : m)));
+  const removeLastMeal = () => {
+    const last = meals[meals.length - 1];
+    if (hasFoods(last) && !window.confirm(`Remove ${last.name} and the foods in it?`)) return;
+    applyMeals(removeMeal(meals, last.id));
+  };
+  const openMeal = (id) => {
     setSelectedMealId(id);
+    setMealFrom(activeTab);
     setActiveTab("meal");
   };
-
-  const updateMeal = (id, patch) => {
-    const current = meals.find((x) => x.id === id);
-    if (!current) return;
-    const updated = { ...current, ...patch };
-    setMeals((m) => m.map((x) => (x.id === id ? updated : x)));
-    save(fbSaveMeal(personId, updated));
+  const openDay = (d) => {
+    setDate(d);
+    setActiveTab("log");
   };
 
   const selectedMealIndex = meals.findIndex((m) => m.id === selectedMealId);
   const selectedMeal = selectedMealIndex >= 0 ? meals[selectedMealIndex] : null;
   const mealTargetsList = computeMealTargets(meals, targets, { trainingTime, carbTiming });
   const selectedMealTargets = selectedMealIndex >= 0 ? mealTargetsList[selectedMealIndex] : null;
-  const selectedMealEstimatedTime =
-    selectedMealIndex >= 0 ? formatHour(estimateMealHour(selectedMealIndex, meals.length)) : null;
 
   if (loadError) {
     return (
@@ -309,30 +290,13 @@ export default function App() {
 
   return (
     <div style={{ height: "100dvh", display: "flex", flexDirection: "column", background: "#f5f5f5" }}>
-      <header style={{ flexShrink: 0, padding: "20px 20px 4px" }}>
+      <header style={{ flexShrink: 0, padding: "16px 20px 10px" }}>
         <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ fontSize: 26, fontWeight: 900, color: "#0a0a0a", letterSpacing: "-0.03em", lineHeight: 1 }}>
             STACK NUTRITION
           </div>
-          <button
-            onClick={() => setActiveTab("settings")}
-            style={{ background: "none", border: "none", padding: "8px 0 8px 12px", fontSize: 12, fontWeight: 800, color: activeTab === "settings" ? "#0a0a0a" : "#888", cursor: "pointer" }}
-          >
-            Settings
-          </button>
         </div>
       </header>
-
-      <TabBar
-        active={activeTab}
-        onChange={setActiveTab}
-        tabs={[
-          { key: "log", label: "Log" },
-          { key: "history", label: "History" },
-          { key: "setup", label: "Setup" },
-          { key: "meal", label: selectedMeal ? selectedMeal.name : "Meal", disabled: !selectedMeal },
-        ]}
-      />
 
       {saveError && (
         <div style={{ flexShrink: 0, background: "#fff5f5", color: "#a4302a", padding: "10px 20px", fontSize: 12, fontWeight: 700, textAlign: "center" }}>
@@ -342,7 +306,9 @@ export default function App() {
 
       <main style={{ flex: 1, overflowY: "auto", padding: "16px 20px 24px" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
-          {activeTab === "log" ? (
+          {activeTab === "dashboard" ? (
+            <DashboardPage weights={weights} onSaveWeight={saveWeight} onDeleteWeight={deleteWeight} days={days} today={today} targets={targets} onOpenDay={openDay} onSetTargets={() => setActiveTab("strategy")} />
+          ) : activeTab === "log" ? (
             <LogPage
               date={date}
               today={today}
@@ -357,29 +323,24 @@ export default function App() {
               saving={saving > 0}
               onSaveEntry={saveEntry}
               onDeleteEntry={deleteEntry}
+              onEditMeal={openMeal}
             />
-          ) : activeTab === "history" ? (
-            <HistoryPage
-              days={days}
-              today={today}
-              onOpen={(d) => {
-                setDate(d);
-                setActiveTab("log");
-              }}
-            />
-          ) : activeTab === "settings" ? (
-            <SettingsPage person={person} onSwitch={switchPerson} onDelete={deletePerson} />
-          ) : activeTab === "setup" ? (
-            <SetupPage
+          ) : activeTab === "more" ? (
+            <MorePage person={person} onSwitch={switchPerson} onDelete={deletePerson} />
+          ) : activeTab === "strategy" ? (
+            <StrategyPage
               inputs={inputs}
               targets={targets}
               onRecalc={recalcTargets}
               onEditTargets={setTargets}
               meals={meals}
-              onMealCountChange={setMealCount}
-              selectedMealId={selectedMealId}
-              onSelect={selectMeal}
-              onUpdate={updateMeal}
+              onAddMeal={() => applyMeals(addMeal(meals))}
+              onRemoveLastMeal={removeLastMeal}
+              onSelect={openMeal}
+              onMealPatch={updateMeal}
+              onSetPct={(id, v) => applyMeals(setPct(meals, id, v))}
+              onToggleLock={(id) => applyMeals(toggleLock(meals, id))}
+              onSortMeals={() => setMeals(sortMeals)}
               trainingTime={trainingTime}
               onTrainingTimeChange={setTrainingTime}
               carbTiming={carbTiming}
@@ -387,10 +348,13 @@ export default function App() {
             />
           ) : selectedMeal ? (
             <>
+              <button onClick={() => setActiveTab(mealFrom)} style={{ background: "none", border: "none", padding: "4px 0 12px", fontSize: 13, fontWeight: 800, color: "#0a0a0a", cursor: "pointer" }}>
+                ‹ Back
+              </button>
               <MealBuilder
                 meal={selectedMeal}
                 mealTargets={selectedMealTargets}
-                estimatedTime={selectedMealEstimatedTime}
+                time={formatTime(selectedMeal.time)}
                 foods={FOODS}
                 foodLookup={FOOD_LOOKUP}
                 onUpdate={(patch) => updateMeal(selectedMeal.id, patch)}
@@ -399,14 +363,20 @@ export default function App() {
                 Food data from USDA FoodData Central, fdc.nal.usda.gov
               </div>
             </>
-          ) : (
-            <div style={{ textAlign: "center", padding: "80px 20px", color: "#bbb" }}>
-              <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>No meal selected</div>
-              <div style={{ fontSize: 13 }}>Pick how many meals you want on the Setup tab, then tap one to build it here.</div>
-            </div>
-          )}
+          ) : null}
         </div>
       </main>
+
+      <TabBar
+        active={activeTab === "meal" ? mealFrom : activeTab}
+        onChange={setActiveTab}
+        tabs={[
+          { key: "dashboard", label: "Dashboard" },
+          { key: "log", label: "Food Log" },
+          { key: "strategy", label: "Strategy" },
+          { key: "more", label: "More" },
+        ]}
+      />
     </div>
   );
 }

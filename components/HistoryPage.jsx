@@ -8,7 +8,7 @@ export default function HistoryPage({ days, today, onOpen }) {
     .filter((d) => d && dayEntries(d).length > 0)
     .sort((a, b) => b.date.localeCompare(a.date));
   if (list.length === 0) {
-    return <div style={{ textAlign: "center", padding: "80px 20px", color: "#bbb", fontSize: 13 }}>Days you log will show up here.</div>;
+    return <div style={{ textAlign: "center", padding: "24px 20px", color: "#bbb", fontSize: 13 }}>Days you log will show up here.</div>;
   }
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>

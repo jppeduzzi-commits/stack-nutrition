@@ -28,7 +28,7 @@ const selectStyle = {
   border: "1.5px solid #e8e8e8",
   borderRadius: 10,
   padding: "8px 10px",
-  fontSize: 13,
+  fontSize: 16,
   fontWeight: 700,
   color: "#0a0a0a",
   outline: "none",
@@ -113,7 +113,7 @@ function MacroSection({ macro, foods, foodLookup, primaryValue, onPrimaryChange,
   );
 }
 
-export default function MealBuilder({ meal, mealTargets, estimatedTime, foods, foodLookup, onUpdate }) {
+export default function MealBuilder({ meal, mealTargets, time, foods, foodLookup, onUpdate }) {
   const allFoods = useMemo(() => ALL_ROLES.concat("extra").flatMap((r) => foods[r] || []), [foods]);
 
   const result = solveMeal(meal, null, foodLookup, mealTargets);
@@ -146,7 +146,7 @@ export default function MealBuilder({ meal, mealTargets, estimatedTime, foods, f
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
         <div style={{ fontSize: 20, fontWeight: 900, color: "#0a0a0a", letterSpacing: "-0.01em" }}>{meal.name}</div>
         <div style={{ fontSize: 12, fontWeight: 700, color: "#bbb" }}>
-          {estimatedTime ? `~${estimatedTime} · ` : ""}
+          {time ? `${time} · ` : ""}
           {meal.pctOfDay || 0}% of day
         </div>
       </div>

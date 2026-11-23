@@ -57,7 +57,7 @@ export default function SetupPage({
   onCarbTimingChange,
 }) {
   const [draft, setDraft] = useState(inputs);
-  const [adjustOpen, setAdjustOpen] = useState(false);
+  const [adjustOpen, setAdjustOpen] = useState(!targets.calories); // open until targets are set
 
   const setField = (key) => (e) => {
     const raw = e.target.value;
@@ -66,7 +66,10 @@ export default function SetupPage({
 
   const setTargetField = (key) => (e) => {
     const raw = e.target.value;
-    onEditTargets({ ...targets, [key]: raw === "" ? 0 : Number(raw) });
+    const next = { ...targets, [key]: raw === "" ? 0 : Number(raw) };
+    // Macros typed straight in with no calorie goal: calories follow the macros.
+    if (!inputs.calories) next.calories = next.proteinG * 4 + next.carbG * 4 + next.fatG * 9;
+    onEditTargets(next);
   };
 
   const fmt = (n) => (Number.isFinite(n) ? Math.round(n * 10) / 10 : "—");
@@ -209,7 +212,7 @@ function MacroStat({ macro, value, onChange }) {
       <div style={{ marginBottom: 4 }}>
         <MacroBadge macro={macro} />
       </div>
-      <input type="number" step="0.1" value={Math.round(value * 10) / 10} onChange={onChange} style={{ ...inputStyle, width: "100%" }} />
+      <input type="number" step="0.1" value={Math.round(value * 10) / 10} onChange={onChange} onFocus={(e) => e.target.select()} style={{ ...inputStyle, width: "100%" }} />
       <div style={{ fontSize: 9, fontWeight: 700, color: "#bbb", marginTop: 2 }}>g/day</div>
     </div>
   );
@@ -219,7 +222,7 @@ function MiniField({ label, value, onChange, step }) {
   return (
     <div>
       <div style={{ fontSize: 9, fontWeight: 700, color: "#888", marginBottom: 3 }}>{label}</div>
-      <input type="number" step={step ?? "1"} value={value} onChange={onChange} style={{ ...inputStyle, width: "100%" }} />
+      <input type="number" step={step ?? "1"} value={value} onChange={onChange} onFocus={(e) => e.target.select()} style={{ ...inputStyle, width: "100%" }} />
     </div>
   );
 }

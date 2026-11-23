@@ -18,20 +18,9 @@ import HistoryPage from "./HistoryPage";
 import NameScreen from "./NameScreen";
 import TabBar from "./TabBar";
 
-const DEFAULT_INPUTS = {
-  calories: 2500,
-  bodyWeight: 200,
-  lbm: 178,
-  proteinRatio: 1.5,
-  fatPct: 30,
-};
-
-const DEFAULT_TARGETS = computeDailyTargets({
-  calories: DEFAULT_INPUTS.calories,
-  lbm: DEFAULT_INPUTS.lbm,
-  proteinRatioPerLbLbm: DEFAULT_INPUTS.proteinRatio,
-  fatPctOfCalories: DEFAULT_INPUTS.fatPct,
-});
+// New accounts start at zero -- targets are personal, so nothing is assumed.
+const DEFAULT_INPUTS = { calories: 0, bodyWeight: 0, lbm: 0, proteinRatio: 0, fatPct: 0 };
+const DEFAULT_TARGETS = { calories: 0, proteinG: 0, fatG: 0, carbG: 0 };
 
 const ALL_FOODS = Object.values(FOODS).flat();
 

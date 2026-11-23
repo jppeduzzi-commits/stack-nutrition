@@ -9,6 +9,7 @@ import { FOODS, FOOD_LOOKUP } from "@/lib/foods";
 import DailyTargetsForm from "./DailyTargetsForm";
 import Timeline from "./Timeline";
 import MealBuilder from "./MealBuilder";
+import TabBar from "./TabBar";
 
 const DEFAULT_INPUTS = {
   calories: 2500,
@@ -35,6 +36,7 @@ export default function App() {
   const [dayRange, setDayRange] = useState(DEFAULT_DAY_RANGE);
   const [meals, setMeals] = useState([]);
   const [selectedMealId, setSelectedMealId] = useState(null);
+  const [activeTab, setActiveTab] = useState("today");
   const saveTimer = useRef(null);
 
   // Sign in anonymously and load any previously saved state for this device.
@@ -87,7 +89,13 @@ export default function App() {
     const meal = { id, name: "New meal", time, pctOfDay: 0, proteinFood: "", carbFood: "", fatFood: "", extras: [] };
     setMeals((m) => [...m, meal]);
     setSelectedMealId(id);
+    setActiveTab("meal");
     if (uid) fbSaveMeal(uid, meal);
+  };
+
+  const selectMeal = (id) => {
+    setSelectedMealId(id);
+    setActiveTab("meal");
   };
 
   const updateMeal = (id, patch) => {
@@ -105,38 +113,44 @@ export default function App() {
   const removeMeal = (id) => {
     setMeals((m) => m.filter((x) => x.id !== id));
     setSelectedMealId((sel) => (sel === id ? null : sel));
+    setActiveTab((tab) => (selectedMealId === id ? "today" : tab));
     if (uid) fbDeleteMeal(uid, id);
   };
 
   const selectedMeal = meals.find((m) => m.id === selectedMealId) || null;
 
   return (
-    <div style={{ minHeight: "100dvh", background: "#f5f5f5", padding: "52px 20px 60px" }}>
-      <div style={{ maxWidth: 720, margin: "0 auto" }}>
-        <div style={{ marginBottom: 40 }}>
-          <div style={{ fontSize: 40, fontWeight: 900, color: "#0a0a0a", letterSpacing: "-0.04em", lineHeight: 1 }}>
+    <div style={{ height: "100dvh", display: "flex", flexDirection: "column", background: "#f5f5f5" }}>
+      <header style={{ flexShrink: 0, padding: "20px 20px 4px" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto" }}>
+          <div style={{ fontSize: 26, fontWeight: 900, color: "#0a0a0a", letterSpacing: "-0.03em", lineHeight: 1 }}>
             STACK NUTRITION
           </div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "#888", marginTop: 8 }}>
-            Tell it what you&rsquo;re eating, it tells you how much.
-          </div>
         </div>
+      </header>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <DailyTargetsForm inputs={inputs} targets={targets} onRecalc={recalcTargets} onEditTargets={setTargets} />
+      <main style={{ flex: 1, overflowY: "auto", padding: "16px 20px 24px" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto" }}>
+          {activeTab === "today" ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <DailyTargetsForm inputs={inputs} targets={targets} onRecalc={recalcTargets} onEditTargets={setTargets} />
 
-          <Timeline
-            meals={meals}
-            dayRange={dayRange}
-            onRangeChange={setDayRange}
-            selectedMealId={selectedMealId}
-            onAdd={addMeal}
-            onSelect={setSelectedMealId}
-            onUpdate={updateMeal}
-            onRemove={removeMeal}
-          />
+              <Timeline
+                meals={meals}
+                dayRange={dayRange}
+                onRangeChange={setDayRange}
+                selectedMealId={selectedMealId}
+                onAdd={addMeal}
+                onSelect={selectMeal}
+                onUpdate={updateMeal}
+                onRemove={removeMeal}
+              />
 
-          {selectedMeal && (
+              <div style={{ fontSize: 11, fontWeight: 600, color: "#bbb", marginTop: 16, textAlign: "center" }}>
+                Food data from USDA FoodData Central, fdc.nal.usda.gov
+              </div>
+            </div>
+          ) : selectedMeal ? (
             <MealBuilder
               meal={selectedMeal}
               dailyTargets={targets}
@@ -144,13 +158,23 @@ export default function App() {
               foodLookup={FOOD_LOOKUP}
               onUpdate={(patch) => updateMeal(selectedMeal.id, patch)}
             />
+          ) : (
+            <div style={{ textAlign: "center", padding: "80px 20px", color: "#bbb" }}>
+              <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>No meal selected</div>
+              <div style={{ fontSize: 13 }}>Add or tap a meal on the Today tab to build it here.</div>
+            </div>
           )}
         </div>
+      </main>
 
-        <div style={{ fontSize: 11, fontWeight: 600, color: "#bbb", marginTop: 40, textAlign: "center" }}>
-          Food data from USDA FoodData Central, fdc.nal.usda.gov
-        </div>
-      </div>
+      <TabBar
+        active={activeTab}
+        onChange={setActiveTab}
+        tabs={[
+          { key: "today", label: "Today" },
+          { key: "meal", label: selectedMeal ? selectedMeal.name : "Meal", disabled: !selectedMeal },
+        ]}
+      />
     </div>
   );
 }
